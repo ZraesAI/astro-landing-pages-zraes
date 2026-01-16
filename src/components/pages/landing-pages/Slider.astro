@@ -7,33 +7,52 @@ export interface Slide {
 	label: string;
 	cta_label: string;
 	cta_url: string;
+	colour: string;
 }
 
 // 2. Data slides hardcoded dengan tema kemanusiaan, agama, dan sosial
 const slides: Slide[] = [
 	{
-		gambar: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&h=1080&fit=crop",
-		label: "Memberi <span class='text-[#FFD700]'>Harapan</span> untuk Mereka yang Membutuhkan",
-		cta_label: "Jadi Relawan",
-		cta_url: "/program"
+		gambar: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920&h=1080&fit=crop",
+		label: "Menjunjung tinggi <span class='text-[#FFD700]'>kejujuran, amanah, dan tanggung jawab </span> dalam setiap aktivitas kelembagaan.",
+		cta_label: "Integritas",
+		cta_url: "/program",
+		colour: "#FFD700"
 	},
 	{
-		gambar: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1920&h=1080&fit=crop",
-		label: "Program <span class='text-[#81D4FA]'>Kemanusiaan</span> yang Membawa Perubahan",
-		cta_label: "Lihat Kegiatan",
-		cta_url: "/program"
+		gambar: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1920&h=1080&fit=crop",
+		label: "Mengembangkan <span class='text-[#64B5F6]'>ilmu pengetahuan </span> secara berkelanjutan dengan pendekatan ilmiah dan berbasis nilai Islam.",
+		cta_label: "Keilmuan",
+		cta_url: "/program",
+		colour: "#64B5F6"
 	},
 	{
-		gambar: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1920&h=1080&fit=crop",
-		label: "Menebar <span class='text-[#FFD180]'>Rahmat</span> melalui Kebaikan Bersama",
-		cta_label: "Berbagi Kebaikan",
-		cta_url: "/program"
+		gambar: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1920&h=1080&fit=crop",
+		label: "Menjadikan <span class='text-[#4DB6AC]'>Al-Qur'an dan Hadis </span> sebagai landasan utama dalam berpikir, bersikap, dan bertindak.",
+		cta_label: "Keislaman",
+		cta_url: "/program",
+		colour: "#4DB6AC"
 	},
 	{
-		gambar: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1920&h=1080&fit=crop",
-		label: "Yayasan <span class='text-[#FFD700]'>Sawiyan</span>: Berpijak pada Iman, Bergerak untuk Umat",
-		cta_label: "Pelajari Lebih Lanjut",
-		cta_url: "/profile"
+		gambar: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop",
+		label: "Mendorong <span class='text-[#BA68C8]'>kreativitas dan pembaruan </span>dalam pendidikan, penelitian, dan pengabdian kepada masyarakat.",
+		cta_label: "Inovasi",
+		cta_url: "/profile",
+		colour: "#BA68C8"
+	},
+	{
+		gambar: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&h=1080&fit=crop",
+		label: "Mengedepankan <span class='text-[#eb5954]'>kebermanfaatan, pemberdayaan, dan keadilan sosial</span> bagi masyarakat luas.",
+		cta_label: "Kepedulian Sosial",
+		cta_url: "/profile",
+		colour: "#eb5954"
+	},
+	{
+		gambar: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1920&h=1080&fit=crop",
+		label: "Mengembangkan <span class='text-[#FF9800]'>kerja sama </span>dengan berbagai pihak untuk memperluas dampak dan keberlanjutan program yayasan.",
+		cta_label: "Kolaborasi",
+		cta_url: "/profile",
+		colour: "#FF9800"
 	}
 ];
 
@@ -73,11 +92,20 @@ const autoplayDelay = 6000;
 	<!-- Fixed content overlay -->
 	<div class="absolute inset-0 flex flex-col gap-4 md:gap-6 justify-center items-start w-full h-full p-6 md:p-12 lg:px-16 xl:px-24  z-10 max-w-4xl pointer-events-none">
 		<!-- Text container dengan animasi -->
-		<div id="text-container" class="text-left pointer-events-auto">
+		<div id="text-container" class="text-left pointer-events-auto flex flex-col gap-3">
+			<!-- CTA Label Badge -->
+			<div
+				id="slide-cta-label"
+				class="inline-flex items-center gap-2 text-white/90 text-sm md:text-base font-semibold px-3 py-1.5 md:px-4 md:py-2 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 w-fit"
+			>
+				<span id="cta-dot-indicator" class="w-2 h-2 rounded-full animate-pulse" style="background-color: #FFD700;"></span>
+				<span id="cta-label-text">{slides[0].cta_label}</span>
+			</div>
+			<!-- Main Label -->
 			<div
 				id="slide-text"
 				set:html={slides[0].label}
-				class="text-white text-2xl md:text-4xl lg:text-5xl leading-tight text-left font-bold drop-shadow-lg"
+				class="text-white text-xl md:text-2xl lg:text-4xl leading-tight text-left font-bold drop-shadow-lg"
 			></div>
 		</div>
 
@@ -99,17 +127,43 @@ const autoplayDelay = 6000;
 	}
 
 	/* Animasi untuk text */
-	#slide-text {
+	#slide-text, #slide-cta-label {
 		transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 	}
 </style>
 
 <script define:vars={{ autoplayDelay }}>
 	const slidesData = [
-		"Memberi <span class='text-[#FFD700]'>Harapan</span> untuk Mereka yang Membutuhkan",
-		"Program <span class='text-[#81D4FA]'>Kemanusiaan</span> yang Membawa Perubahan",
-		"Menebar <span class='text-[#FFD180]'>Rahmat</span> melalui Kebaikan Bersama",
-		"Yayasan <span class='text-[#FFD700]'>Sawiyan</span>: Berpijak pada Iman, Bergerak untuk Umat"
+		{
+			label: "Menjunjung tinggi <span class='text-[#FFD700]'>kejujuran, amanah, dan tanggung jawab </span> dalam setiap aktivitas kelembagaan.",
+			cta_label: "Integritas",
+			colour: "#FFD700"
+		},
+		{
+			label: "Mengembangkan <span class='text-[#64B5F6]'>ilmu pengetahuan </span> secara berkelanjutan dengan pendekatan ilmiah dan berbasis nilai Islam.",
+			cta_label: "Keilmuan",
+			colour: "#64B5F6"
+		},
+		{
+			label: "Menjadikan <span class='text-[#4DB6AC]'>Al-Qur'an dan Hadis </span> sebagai landasan utama dalam berpikir, bersikap, dan bertindak.",
+			cta_label: "Keislaman",
+			colour: "#4DB6AC"
+		},
+		{
+			label: "Mendorong <span class='text-[#BA68C8]'>kreativitas dan pembaruan </span>dalam pendidikan, penelitian, dan pengabdian kepada masyarakat.",
+			cta_label: "Inovasi",
+			colour: "#BA68C8"
+		},
+		{
+			label: "Mengedepankan <span class='text-[#66BB6A]'>kebermanfaatan, pemberdayaan, dan keadilan sosial</span> bagi masyarakat luas.",
+			cta_label: "Kepedulian Sosial",
+			colour: "#66BB6A"
+		},
+		{
+			label: "Mengembangkan <span class='text-[#FF9800]'>kerja sama </span>dengan berbagai pihak untuk memperluas dampak dan keberlanjutan program yayasan.",
+			cta_label: "Kolaborasi",
+			colour: "#FF9800"
+		}
 	];
 
 	document.addEventListener("DOMContentLoaded", () => {
@@ -148,19 +202,34 @@ const autoplayDelay = 6000;
 		setInitialPosition();
 
 		// Update text dengan animasi
+		const ctaLabelElement = document.getElementById("slide-cta-label");
 		const updateText = (index) => {
 			const actualIndex = index === 0 ? slidesCount - 1 : (index === slidesCount + 1 ? 0 : index - 1);
-			const text = slidesData[actualIndex];
+			const slideData = slidesData[actualIndex];
 			
 			// Fade out
 			textElement.style.opacity = "0";
 			textElement.style.transform = "translateY(20px)";
+			if (ctaLabelElement) {
+				ctaLabelElement.style.opacity = "0";
+				ctaLabelElement.style.transform = "translateY(-10px)";
+			}
 			
 			setTimeout(() => {
-				textElement.innerHTML = text;
+				textElement.innerHTML = slideData.label;
+				if (ctaLabelElement) {
+					const badge = document.getElementById('cta-label-text');
+					if (badge) badge.textContent = slideData.cta_label;				
+				// Update warna dot indicator
+				const dotIndicator = document.getElementById('cta-dot-indicator');
+				if (dotIndicator) dotIndicator.style.backgroundColor = slideData.colour;				}
 				// Fade in
 				textElement.style.opacity = "1";
 				textElement.style.transform = "translateY(0)";
+				if (ctaLabelElement) {
+					ctaLabelElement.style.opacity = "1";
+					ctaLabelElement.style.transform = "translateY(0)";
+				}
 			}, 300);
 		};
 
@@ -226,6 +295,10 @@ const autoplayDelay = 6000;
 		// Initialize text animation
 		textElement.style.transition = "opacity 0.3s ease-out, transform 0.3s ease-out";
 		textElement.style.opacity = "1";
+		if (ctaLabelElement) {
+			ctaLabelElement.style.transition = "opacity 0.3s ease-out, transform 0.3s ease-out";
+			ctaLabelElement.style.opacity = "1";
+		}
 
 		startAutoPlay();
 	});

@@ -1,0 +1,177 @@
+---
+import { Target, Eye, Lightbulb, Sparkles, BookOpen, Users2, Heart, Globe, Star } from "lucide-astro";
+import FadeInSection from "../../animations/FadeInSection";
+import AnimatedCard from "../../animations/AnimatedCard";
+import StaggerContainer from "../../animations/StaggerContainer";
+import StaggerItem from "../../animations/StaggerItem";
+---
+
+<section id="visi-misi" class="bg-gradient-to-br from-[#F5F5F5] via-white to-[#F5F5F5] py-20 lg:py-32 overflow-hidden relative scroll-mt-20">
+  <!-- Background decorative elements -->
+  <div class="absolute top-0 right-0 w-96 h-96 bg-[#388E3C]/5 rounded-full blur-3xl -z-10 animate-pulse"></div>
+  <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#81D4FA]/5 rounded-full blur-3xl -z-10 animate-pulse" style="animation-delay: 1s;"></div>
+  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FFD700]/3 rounded-full blur-3xl -z-10"></div>
+
+  <div class="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
+    <div class="flex flex-col gap-20">
+      {/* Header */}
+      <FadeInSection client:load delay={0}>
+        <div class="text-center max-w-4xl mx-auto space-y-6">
+          <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#388E3C]/10 to-[#81D4FA]/10 rounded-full border border-[#388E3C]/30 backdrop-blur-sm">
+            <Target class="w-5 h-5 text-[#388E3C]" />
+            <span class="text-sm font-semibold text-[#388E3C] uppercase tracking-wider">Visi & Misi</span>
+          </div>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-[#388E3C] via-[#81D4FA] to-[#FFD700] bg-clip-text text-transparent leading-tight pb-1">Visi & Misi Yayasan Sawiyan</h2>
+          <p class="text-xl md:text-2xl text-gray-700 leading-relaxed font-medium">Arah dan Tujuan Pengembangan Peradaban</p>
+        </div>
+      </FadeInSection>
+
+      {/* Visi Section - Full Width with Image Background */}
+      <FadeInSection client:load delay={0.1}>
+        <div class="relative">
+          <AnimatedCard client:load delay={0.1}>
+            <div class="bg-gradient-to-br from-[#388E3C] via-[#2E7D32] to-[#1B5E20] rounded-2xl shadow-xl overflow-hidden relative [&_::selection]:bg-[#FFD700]/70 [&_::selection]:text-[#1B5E20]">
+              {/* Background Pattern */}
+              <div class="absolute inset-0 opacity-10">
+                <div
+                  class="absolute inset-0"
+                  style="background-image: url('data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"
+                >
+                </div>
+              </div>
+
+              <div class="relative z-10 p-6 md:p-10">
+                <div class="max-w-5xl mx-auto">
+                  {/* Title */}
+                  <div class="flex justify-center mb-6">
+                    <div class="inline-flex items-center gap-3 px-6 py-3 bg-white/20 backdrop-blur-md rounded-2xl border-2 border-white/40">
+                      <Eye class="w-7 h-7 text-white" />
+                      <h3 class="text-2xl md:text-3xl font-extrabold text-white">Visi</h3>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 md:p-7 border border-white/20">
+                    <p class="text-base md:text-lg text-white leading-relaxed text-center font-medium">
+                      Menjadi yayasan unggulan dalam pengembangan <span class="text-[#FFD700] font-bold">pendidikan, penelitian, dan pengabdian kepada masyarakat</span> yang berlandaskan integrasi ilmu pengetahuan kontemporer dengan <span
+                        class="text-[#81D4FA] font-bold">Al-Qur'an dan Hadis</span
+                      > untuk membangun peradaban yang <span class="text-[#FFD700] font-bold">beriman, berilmu, dan berakhlak mulia</span>.
+                    </p>
+                  </div>
+
+                  {/* Decorative bottom elements */}
+                  <div class="flex justify-center gap-2 mt-6">
+                    <div class="w-16 h-1 bg-white/40 rounded-full"></div>
+                    <div class="w-1 h-1 bg-[#FFD700] rounded-full mt-0.5"></div>
+                    <div class="w-16 h-1 bg-white/40 rounded-full"></div>
+                  </div>
+                </div>
+
+                {/* Decorative corners */}
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-bl-full"></div>
+                <div class="absolute bottom-0 left-0 w-32 h-32 bg-white/5 rounded-tr-full"></div>
+              </div>
+            </div>
+          </AnimatedCard>
+        </div>
+
+        {/* Misi Section - Numbered List with Icons */}
+        <FadeInSection client:load delay={0.15} className="mt-10">
+          <div class="space-y-12">
+            {/* Misi Header */}
+            <div class="text-center">
+              <div class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-[#81D4FA]/20 to-[#388E3C]/20 rounded-2xl border-2 border-[#81D4FA]/30 mb-6">
+                <Lightbulb class="w-7 h-7 text-[#388E3C]" />
+                <h3 class="text-3xl md:text-4xl font-extrabold text-[#388E3C]">Misi</h3>
+              </div>
+              <p class="text-lg text-gray-600 max-w-3xl mx-auto">Lima pilar utama dalam mewujudkan visi yayasan untuk kemajuan umat dan bangsa</p>
+            </div>
+
+            {/* Misi Items */}
+            <StaggerContainer client:load className="space-y-8 max-w-5xl mx-auto">
+              {
+                [
+                  {
+                    number: "01",
+                    title: "Pendidikan Berkualitas",
+                    description: "Menyelenggarakan dan mengembangkan pendidikan yang berkualitas dengan mengintegrasikan ilmu pengetahuan modern dan nilai-nilai Islam",
+                    icon: BookOpen,
+                    color: "from-[#388E3C] to-[#2E7D32]",
+                    bgColor: "from-[#388E3C]/10 to-[#2E7D32]/5",
+                  },
+                  {
+                    number: "02",
+                    title: "Penelitian Integratif",
+                    description: "Mendorong dan mengembangkan penelitian integratif yang berorientasi pada pengembangan keilmuan dan pemecahan masalah umat dan masyarakat",
+                    icon: Sparkles,
+                    color: "from-[#388E3C] to-[#2E7D32]",
+                    bgColor: "from-[#388E3C]/10 to-[#2E7D32]/5",
+                  },
+                  {
+                    number: "03",
+                    title: "Pengabdian Masyarakat",
+                    description: "Melaksanakan pengabdian kepada masyarakat berbasis pemberdayaan, edukasi, dan nilai-nilai keislaman yang rahmatan lil 'alamin",
+                    icon: Users2,
+                    color: "from-[#388E3C] to-[#2E7D32]",
+                    bgColor: "from-[#388E3C]/10 to-[#2E7D32]/5",
+                  },
+                  {
+                    number: "04",
+                    title: "Budaya Inovasi",
+                    description: "Menumbuhkan budaya keilmuan, inovasi, dan kolaborasi dalam rangka menjawab tantangan global dan lokal",
+                    icon: Globe,
+                    color: "from-[#388E3C] to-[#2E7D32]",
+                    bgColor: "from-[#388E3C]/10 to-[#2E7D32]/5",
+                  },
+                  {
+                    number: "05",
+                    title: "Karakter Unggul",
+                    description: "Menguatkan karakter insan yang beriman, berakhlak mulia, bertanggung jawab, dan berkontribusi aktif bagi kemajuan bangsa dan umat",
+                    icon: Star,
+                    color: "from-[#388E3C] to-[#2E7D32]",
+                    bgColor: "from-[#388E3C]/10 to-[#2E7D32]/5",
+                  },
+                ].map((item) => {
+                  const IconComponent = item.icon;
+                  return (
+                    <StaggerItem client:load>
+                      <AnimatedCard client:load delay={0.05}>
+                        <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 md:p-7 relative overflow-hidden group border border-gray-200 hover:border-[#388E3C]/30">
+                          {/* Top gradient accent */}
+                          <div class={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${item.color}`} />
+
+                          <div class="flex flex-col md:flex-row gap-5 md:gap-6 items-start">
+                            {/* Number Badge */}
+                            <div class="flex-shrink-0">
+                              <div class={`relative w-14 h-14 bg-gradient-to-br ${item.bgColor} rounded-xl flex items-center justify-center border border-gray-200 group-hover:scale-110 transition-transform duration-300`}>
+                                <span class={`text-2xl font-black bg-gradient-to-br ${item.color} bg-clip-text text-transparent`}>{item.number}</span>
+                              </div>
+                            </div>
+
+                            {/* Content */}
+                            <div class="flex-1 space-y-2">
+                              <div class="flex items-center gap-2.5">
+                                <div class={`w-9 h-9 bg-gradient-to-br ${item.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                                  <IconComponent class="w-5 h-5 text-white" />
+                                </div>
+                                <h4 class="text-lg font-bold text-gray-800">{item.title}</h4>
+                              </div>
+                              <p class="text-gray-600 leading-relaxed text-base pl-11">{item.description}</p>
+                            </div>
+                          </div>
+
+                          {/* Decorative corner */}
+                          <div class="absolute bottom-0 right-0 w-24 h-24 bg-gradient-to-tl from-gray-50 to-transparent rounded-tl-full opacity-40" />
+                        </div>
+                      </AnimatedCard>
+                    </StaggerItem>
+                  );
+                })
+              }
+            </StaggerContainer>
+          </div>
+        </FadeInSection>
+      </FadeInSection>
+    </div>
+  </div>
+</section>
