@@ -72,7 +72,7 @@ export default function Navbar({ telegramBotUrl = "https://t.me/Gilang_Bot" }: N
 
   return (
     <div ref={navRef} className="w-full fixed top-0 left-0 right-0 z-[100] px-4 py-3 flex justify-center">
-      <nav className="w-full max-w-6xl flex justify-between items-center px-6 2xl:px-8 py-3 backdrop-blur-xl relative z-[100] bg-[#1f2833]/90 rounded-2xl border border-[#66fcf1]/30 shadow-[0_8px_32px_rgba(102,252,241,0.15)]">
+      <nav className="w-full max-w-[1400px] flex justify-between items-center px-8 2xl:px-10 py-3 backdrop-blur-xl relative z-[100] bg-[#1f2833]/90 rounded-2xl border border-[#66fcf1]/30 shadow-[0_8px_32px_rgba(102,252,241,0.15)]">
         <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
           {/* Logo */}
           <a href="/" className="cursor-pointer hover:opacity-90 transition-all duration-300 ease-out active:opacity-70 flex-shrink-0 group">
