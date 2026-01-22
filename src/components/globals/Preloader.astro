@@ -1,44 +1,58 @@
 ---
-// Preloader component dengan animasi yang mengikuti cursor
+// Preloader component - Web3 Theme with Neural Network animation
 ---
 
-<div id="preloader" class="fixed inset-0 z-[9999] bg-brand-primary flex items-center justify-center transition-opacity duration-500">
-  <!-- Background dengan pattern -->
+<div id="preloader" class="fixed inset-0 z-[9999] bg-brand-background flex items-center justify-center transition-opacity duration-500">
+  <!-- Background dengan pattern Web3 -->
   <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-brand-primary via-brand-primary-darker to-brand-primary opacity-90"></div>
-    <div class="absolute inset-0 opacity-20">
-      <div class="absolute top-0 left-0 w-full h-full" style="background-image: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,0.05) 35px, rgba(255,255,255,0.05) 70px);"></div>
-    </div>
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-background via-brand-surface to-brand-background"></div>
+    <!-- Grid pattern -->
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(var(--color-primary) 1px, transparent 1px), linear-gradient(90deg, var(--color-primary) 1px, transparent 1px); background-size: 60px 60px;"></div>
+    <!-- Glowing orbs -->
+    <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-primary/10 rounded-full blur-[150px] animate-pulse"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-secondary/10 rounded-full blur-[150px] animate-pulse" style="animation-delay: 1s;"></div>
   </div>
+
+  <!-- Neural Network Canvas -->
+  <canvas id="preloader-neural" class="absolute inset-0 w-full h-full opacity-30"></canvas>
 
   <!-- Content Container -->
   <div class="relative z-10 flex flex-col items-center justify-center gap-8 text-center">
-    <!-- Logo/Text Sawiyan -->
+    <!-- Logo/Text ZRAES AI -->
     <div class="relative">
-      <h1 class="text-4xl md:text-6xl font-bold font-sora tracking-wider relative z-10">
-        <span class="bg-gradient-to-r from-brand-accent-gold via-brand-accent-orange to-brand-secondary bg-[length:200%_auto] bg-clip-text text-transparent animate-[gradient_3s_ease_infinite]"> SAWIYAN </span>
+      <h1 class="text-4xl md:text-6xl font-bold tracking-wider relative z-10">
+        <span class="bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary bg-[length:200%_auto] bg-clip-text text-transparent animate-[gradient_3s_ease_infinite]"> ZRAES AI </span>
       </h1>
       <!-- Glow effect -->
-      <div class="absolute inset-0 bg-gradient-to-r from-brand-accent-gold/30 via-brand-accent-orange/30 to-brand-secondary/30 blur-2xl opacity-50 animate-pulse"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-brand-primary/30 via-brand-secondary/30 to-brand-primary/30 blur-2xl opacity-50 animate-pulse"></div>
     </div>
 
-    <!-- Progress Bar (Optional) -->
-    <div class="w-64 md:w-80 h-1 bg-white/20 rounded-full overflow-hidden">
-      <div id="progress-bar" class="h-full bg-gradient-to-r from-brand-accent-gold via-brand-accent-orange to-brand-secondary rounded-full transition-all duration-300" style="width: 0%"></div>
+    <!-- Tagline -->
+    <p class="text-brand-text-secondary text-sm md:text-base tracking-widest uppercase">Decentralized Bot Intelligence</p>
+
+    <!-- Progress Bar -->
+    <div class="w-64 md:w-80 h-1 bg-brand-surface rounded-full overflow-hidden border border-brand-primary/20">
+      <div id="progress-bar" class="h-full bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary rounded-full transition-all duration-300" style="width: 0%"></div>
+    </div>
+
+    <!-- Loading Text -->
+    <div class="flex items-center gap-2 text-brand-primary text-sm">
+      <div class="w-2 h-2 rounded-full bg-brand-primary animate-pulse"></div>
+      <span class="loading-text">Initializing Neural Network...</span>
     </div>
   </div>
 
   <!-- Closing animation overlay -->
-  <div id="preloader-closing" class="absolute bg-brand-primary rounded-full opacity-0 pointer-events-none" style="left: 50%; top: 50%; width: 0; height: 0; transform: translate(-50%, -50%) scale(0);"></div>
+  <div id="preloader-closing" class="absolute bg-brand-background rounded-full opacity-0 pointer-events-none" style="left: 50%; top: 50%; width: 0; height: 0; transform: translate(-50%, -50%) scale(0);"></div>
 
   <!-- Cursor Effect -->
   <div id="cursor-effect" class="absolute pointer-events-none opacity-0 z-[10000]" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
     <!-- Ripple effect circles -->
-    <div id="cursor-ripple-1" class="absolute rounded-full border-4 border-brand-accent-gold opacity-0 w-20 h-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
-    <div id="cursor-ripple-2" class="absolute rounded-full border-4 border-brand-accent-orange opacity-0 w-20 h-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
-    <div id="cursor-ripple-3" class="absolute rounded-full border-4 border-brand-secondary opacity-0 w-20 h-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
+    <div id="cursor-ripple-1" class="absolute rounded-full border-2 border-brand-primary opacity-0 w-20 h-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
+    <div id="cursor-ripple-2" class="absolute rounded-full border-2 border-brand-secondary opacity-0 w-20 h-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
+    <div id="cursor-ripple-3" class="absolute rounded-full border-2 border-brand-primary-dark opacity-0 w-20 h-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
     <!-- Center glow -->
-    <div id="cursor-glow" class="absolute rounded-full bg-gradient-to-r from-brand-accent-gold via-brand-accent-orange to-brand-secondary opacity-0 blur-xl w-20 h-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
+    <div id="cursor-glow" class="absolute rounded-full bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary opacity-0 blur-xl w-20 h-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
   </div>
 </div>
 
@@ -52,9 +66,86 @@
       background-position: 100% 50%;
     }
   }
+
+  .loading-text {
+    animation: textPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes textPulse {
+    0%,
+    100% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
 </style>
 
 <script>
+  // Neural Network for Preloader
+  const initPreloaderNeural = () => {
+    const canvas = document.getElementById("preloader-neural") as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const nodes: Array<{ x: number; y: number; vx: number; vy: number }> = [];
+    const nodeCount = 30;
+
+    for (let i = 0; i < nodeCount; i++) {
+      nodes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
+      });
+    }
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      nodes.forEach((node, i) => {
+        node.x += node.vx;
+        node.y += node.vy;
+
+        if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+        if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(102, 252, 241, 0.6)";
+        ctx.fill();
+
+        nodes.forEach((other, j) => {
+          if (i === j) return;
+          const dx = node.x - other.x;
+          const dy = node.y - other.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 150) {
+            ctx.beginPath();
+            ctx.moveTo(node.x, node.y);
+            ctx.lineTo(other.x, other.y);
+            ctx.strokeStyle = `rgba(102, 252, 241, ${0.2 * (1 - dist / 150)})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        });
+      });
+
+      requestAnimationFrame(animate);
+    };
+
+    animate();
+  };
+
+  initPreloaderNeural();
+
   // Track cursor position
   let cursorX = window.innerWidth / 2;
   let cursorY = window.innerHeight / 2;

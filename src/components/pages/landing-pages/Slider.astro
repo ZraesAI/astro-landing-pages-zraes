@@ -1,305 +1,695 @@
 ---
-import { ArrowUpRight } from "@lucide/astro";
+import { ArrowRight, Shield, Wallet, MessageCircle } from "@lucide/astro";
 
-// 1. Mendefinisikan tipe data untuk setiap slide menggunakan TypeScript
-export interface Slide {
-	gambar: string;
-	label: string;
-	cta_label: string;
-	cta_url: string;
-	colour: string;
-}
-
-// 2. Data slides hardcoded dengan tema kemanusiaan, agama, dan sosial
-const slides: Slide[] = [
-	{
-		gambar: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1920&h=1080&fit=crop",
-		label: "Menjunjung tinggi <span class='text-brand-accent-gold'>kejujuran, amanah, dan tanggung jawab </span> dalam setiap aktivitas kelembagaan.",
-		cta_label: "Integritas",
-		cta_url: "/program",
-		colour: "#FFD700"
-	},
-	{
-		gambar: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1920&h=1080&fit=crop",
-		label: "Mengembangkan <span class='text-brand-secondary-dark'>ilmu pengetahuan </span> secara berkelanjutan dengan pendekatan ilmiah dan berbasis nilai Islam.",
-		cta_label: "Keilmuan",
-		cta_url: "/program",
-		colour: "#4FC3F7"
-	},
-	{
-		gambar: "https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1920&h=1080&fit=crop",
-		label: "Menjadikan <span class='text-brand-secondary'>Al-Qur'an dan Hadis </span> sebagai landasan utama dalam berpikir, bersikap, dan bertindak.",
-		cta_label: "Keislaman",
-		cta_url: "/program",
-		colour: "#81D4FA"
-	},
-	{
-		gambar: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop",
-		label: "Mendorong <span class='text-brand-secondary-light'>kreativitas dan pembaruan </span>dalam pendidikan, penelitian, dan pengabdian kepada masyarakat.",
-		cta_label: "Inovasi",
-		cta_url: "/profile",
-		colour: "#B3E5FC"
-	},
-	{
-		gambar: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1920&h=1080&fit=crop",
-		label: "Mengedepankan <span class='text-brand-primary-light'>kebermanfaatan, pemberdayaan, dan keadilan sosial</span> bagi masyarakat luas.",
-		cta_label: "Kepedulian Sosial",
-		cta_url: "/profile",
-		colour: "#4CAF50"
-	},
-	{
-		gambar: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1920&h=1080&fit=crop",
-		label: "Mengembangkan <span class='text-brand-accent-orange'>kerja sama </span>dengan berbagai pihak untuk memperluas dampak dan keberlanjutan program yayasan.",
-		cta_label: "Kolaborasi",
-		cta_url: "/profile",
-		colour: "#FFD180"
-	}
+const stats = [
+  { value: "$2.4B+", label: "Volume Audited", icon: "chart" },
+  { value: "15K+", label: "Bots Verified", icon: "bot" },
+  { value: "99.7%", label: "Accuracy Rate", icon: "target" },
+  { value: "0", label: "Security Breaches", icon: "shield" },
 ];
 
-// 3. Autoplay delay
-const autoplayDelay = 6000;
+const tickers = [
+  { symbol: "BTC", change: "+2.4%", positive: true },
+  { symbol: "ETH", change: "+1.8%", positive: true },
+  { symbol: "SOL", change: "-0.5%", positive: false },
+  { symbol: "AVAX", change: "+3.2%", positive: true },
+];
 ---
 
-<div
-	id="carousel-container"
-	class="w-full h-[95svh] md:h-[91svh] relative overflow-hidden"
-	aria-roledescription="carousel"
->
-	<!-- Background slides container -->
-	<div class="overflow-hidden w-full h-full absolute inset-0">
-		<div id="carousel-track" class="flex h-full">
-			{
-				slides.map((slide) => (
-					<div
-						class="carousel-slide w-full h-full flex-shrink-0 relative"
-						role="group"
-						aria-roledescription="slide"
-					>
-						<img
-							src={slide.gambar}
-							alt={slide.cta_label}
-							class="w-full absolute h-full object-cover pointer-events-none"
-							loading="lazy"
-						/>
-						<!-- Gradient overlay untuk kontras yang lebih baik -->
-						<div class="absolute inset-0 bg-gradient-to-br from-brand-primary/80 via-brand-primary/70 to-brand-primary-darker/80"></div>
-					</div>
-				))
-			}
-		</div>
-	</div>
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-brand-background">
+  <!-- Background gradient -->
+  <div class="absolute inset-0 bg-gradient-to-b from-brand-background via-brand-background to-brand-surface/20"></div>
 
-	<!-- Fixed content overlay -->
-	<div class="absolute inset-0 flex flex-col gap-4 md:gap-6 justify-center items-start w-full h-full p-6 md:p-12 lg:px-16 xl:px-24  z-10 max-w-4xl pointer-events-none">
-		<!-- Text container dengan animasi -->
-		<div id="text-container" class="text-left pointer-events-auto flex flex-col gap-3">
-			<!-- CTA Label Badge -->
-			<div
-				id="slide-cta-label"
-				class="inline-flex items-center gap-2 text-white/90 text-sm md:text-base font-semibold px-3 py-1.5 md:px-4 md:py-2 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 w-fit"
-			>
-				<span id="cta-dot-indicator" class="w-2 h-2 rounded-full animate-pulse" style="background-color: #FFD700;"></span>
-				<span id="cta-label-text">{slides[0].cta_label}</span>
-			</div>
-			<!-- Main Label -->
-			<div
-				id="slide-text"
-				set:html={slides[0].label}
-				class="text-white text-xl md:text-2xl lg:text-4xl leading-tight text-left font-bold drop-shadow-lg"
-			></div>
-		</div>
+  <!-- Grid pattern -->
+  <div class="absolute inset-0 opacity-[0.02] grid-pattern"></div>
 
-		<!-- Single CTA Button -->
-		<button
-			onclick="window.location.href='/program'"
-			class="flex items-center gap-2 text-white text-sm md:text-base font-medium md:px-6 md:py-3 px-4 py-2 border-2 border-white hover:bg-white/10 active:scale-95 transition-all duration-200 cursor-pointer rounded-lg pointer-events-auto"
-		>
-			Lihat Program
-			<ArrowUpRight class="md:w-5 md:h-5 w-4 h-4" />
-		</button>
-	</div>
-</div>
+  <!-- Neural Network Canvas -->
+  <div class="absolute inset-0">
+    <canvas id="neural-network" class="w-full h-full"></canvas>
+  </div>
+
+  <!-- Neural Network Background (from NeuralNetwork.tsx) -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <!-- Background glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-brand-primary/5 blur-[100px]"></div>
+
+    <!-- Central brain orb -->
+    <div class="central-orb absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full"></div>
+
+    <!-- Inner core -->
+    <div class="inner-core absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full"></div>
+
+    <!-- SVG for node connections -->
+    <svg class="absolute inset-0 w-full h-full neural-svg" id="neural-connections"></svg>
+
+    <!-- Neural Nodes -->
+    <div id="neural-nodes" class="absolute inset-0"></div>
+
+    <!-- Orbiting particles -->
+    <div class="orbit-container absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-0 h-0">
+      <div class="orbit-particle orbit-1"><div class="particle"></div></div>
+      <div class="orbit-particle orbit-2"><div class="particle"></div></div>
+      <div class="orbit-particle orbit-3"><div class="particle"></div></div>
+      <div class="orbit-particle orbit-4"><div class="particle"></div></div>
+      <div class="orbit-particle orbit-5"><div class="particle"></div></div>
+      <div class="orbit-particle orbit-6"><div class="particle"></div></div>
+    </div>
+
+    <!-- Data streams -->
+    <div class="data-stream stream-1"></div>
+    <div class="data-stream stream-2"></div>
+    <div class="data-stream stream-3"></div>
+  </div>
+
+  <!-- Gradient Orbs - Neon Acid Lime and Cyan -->
+  <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#BFFF00]/8 rounded-full blur-[150px] animate-pulse-slow"></div>
+  <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-brand-primary/10 rounded-full blur-[150px] animate-pulse-slow delay-1000"></div>
+
+  <!-- Floating Ticker Tape -->
+  <div class="ticker-container opacity-40">
+    <div class="ticker-wrapper">
+      <div class="ticker-tape">
+        {
+          [...tickers, ...tickers, ...tickers, ...tickers].map((ticker, i) => (
+            <div class="ticker-item flex items-center gap-2 px-4 py-1 bg-brand-surface/30 rounded-full border border-brand-primary/20">
+              <span class="text-white/80 font-mono text-sm whitespace-nowrap">{ticker.symbol}</span>
+              <span class={`font-mono text-sm whitespace-nowrap ${ticker.positive ? "text-[#BFFF00]" : "text-red-400"}`}>{ticker.change}</span>
+            </div>
+          ))
+        }
+      </div>
+      <div class="ticker-tape" aria-hidden="true">
+        {
+          [...tickers, ...tickers, ...tickers, ...tickers].map((ticker, i) => (
+            <div class="ticker-item flex items-center gap-2 px-4 py-1 bg-brand-surface/30 rounded-full border border-brand-primary/20">
+              <span class="text-white/80 font-mono text-sm whitespace-nowrap">{ticker.symbol}</span>
+              <span class={`font-mono text-sm whitespace-nowrap ${ticker.positive ? "text-[#BFFF00]" : "text-red-400"}`}>{ticker.change}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 container mx-auto px-6 text-center mt-10">
+    <!-- Badge -->
+    <div class="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#BFFF00]/30 bg-[#BFFF00]/5 mb-8">
+      <Shield class="w-4 h-4 text-[#BFFF00]" />
+      <span class="text-sm text-[#BFFF00] font-medium tracking-wide">On-Chain Verified Security</span>
+    </div>
+
+    <!-- Main Headline -->
+    <h1 class="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-6 max-w-6xl mx-auto tracking-tight">
+      <span class="text-white">ZRAES AI:</span>
+      <br class="hidden sm:block" />
+      <span class="text-glow-lime bg-gradient-to-r from-[#BFFF00] via-brand-primary to-[#BFFF00] bg-clip-text text-transparent">AUDIT YOUR STOCK BOTS</span>
+      <br class="hidden sm:block" />
+      <span class="text-white">ON-CHAIN</span>
+    </h1>
+
+    <!-- Subtext -->
+    <p class="hero-subtitle text-lg sm:text-xl text-[#C5C6C7] max-w-3xl mx-auto mb-12 leading-relaxed">
+      Trustless performance verification powered by <span class="text-brand-primary">decentralized intelligence</span>. Analyze, validate, and secure your algorithmic trading strategies with blockchain transparency.
+    </p>
+
+    <!-- CTA Buttons -->
+    <div class="hero-cta flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href="https://t.me/Gilang_Bot"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-neon group flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#BFFF00] to-[#9FE000] text-brand-background font-bold rounded-xl transition-all duration-300 hover:shadow-[0_0_50px_rgba(191,255,0,0.4)] hover:scale-105 text-lg"
+      >
+        <MessageCircle class="w-6 h-6" />
+        TELEGRAM BOT
+        <ArrowRight class="w-5 h-5 transition-transform group-hover:translate-x-1" />
+      </a>
+      <button
+        class="btn-outline group flex items-center gap-3 px-8 py-4 border-2 border-brand-primary/50 text-brand-primary font-bold rounded-xl transition-all duration-300 hover:border-brand-primary hover:bg-brand-primary/10 hover:shadow-[0_0_40px_rgba(102,252,241,0.3)] text-lg"
+      >
+        <Wallet class="w-6 h-6" />
+        CONNECT WALLET
+      </button>
+    </div>
+
+    <!-- Stats -->
+    <div class="hero-stats mt-24 grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10">
+      {
+        stats.map((stat, i) => (
+          <div class="stat-item group p-6 rounded-2xl bg-brand-surface/30 backdrop-blur-sm border border-brand-primary/10 hover:border-brand-primary/30 transition-all duration-300 hover:bg-brand-surface/50" style={`--delay: ${i * 0.1}s`}>
+            <div class="text-3xl sm:text-4xl font-bold text-glow-cyan bg-gradient-to-r from-brand-primary to-[#BFFF00] bg-clip-text text-transparent mb-2">{stat.value}</div>
+            <div class="text-sm text-[#C5C6C7] uppercase tracking-wider">{stat.label}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Bottom gradient fade -->
+  <div class="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-brand-background to-transparent"></div>
+</section>
 
 <style>
-	/* Smooth transition untuk background slides */
-	#carousel-track {
-		transition: transform 0.7s ease-in-out;
-	}
+  /* Grid Pattern */
+  .grid-pattern {
+    background-image: linear-gradient(rgba(191, 255, 0, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(191, 255, 0, 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
 
-	/* Animasi untuk text */
-	#slide-text, #slide-cta-label {
-		transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-	}
+  /* Text Glow Effects */
+  .text-glow-lime {
+    text-shadow:
+      0 0 30px rgba(191, 255, 0, 0.5),
+      0 0 60px rgba(191, 255, 0, 0.3),
+      0 0 90px rgba(191, 255, 0, 0.1);
+  }
+
+  .text-glow-cyan {
+    text-shadow:
+      0 0 20px rgba(102, 252, 241, 0.5),
+      0 0 40px rgba(102, 252, 241, 0.3);
+  }
+
+  /* Central Brain Orb - from NeuralNetwork.tsx */
+  .central-orb {
+    background: radial-gradient(circle, rgba(102, 252, 241, 0.3) 0%, transparent 70%);
+    box-shadow: 0 0 80px rgba(102, 252, 241, 0.3);
+    animation: centralPulse 4s ease-in-out infinite;
+  }
+
+  @keyframes centralPulse {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.6;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.1);
+      opacity: 0.8;
+    }
+  }
+
+  /* Inner Core */
+  .inner-core {
+    background: radial-gradient(circle, rgba(102, 252, 241, 0.6) 0%, transparent 60%);
+    box-shadow: 0 0 40px rgba(102, 252, 241, 0.5);
+    animation: coreRotate 8s linear infinite;
+  }
+
+  @keyframes coreRotate {
+    0% {
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2) rotate(180deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1) rotate(360deg);
+    }
+  }
+
+  /* Neural Nodes */
+  .neural-node {
+    position: absolute;
+    border-radius: 50%;
+    background: #66fcf1;
+    box-shadow:
+      0 0 10px rgba(102, 252, 241, 0.8),
+      0 0 20px rgba(102, 252, 241, 0.4);
+    animation: nodePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes nodePulse {
+    0%,
+    100% {
+      transform: scale(0.8);
+      opacity: 0.4;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 1;
+    }
+  }
+
+  /* Orbiting Particles */
+  .orbit-container {
+    position: absolute;
+  }
+
+  .orbit-particle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: orbitSpin linear infinite;
+  }
+
+  .orbit-1 {
+    animation-duration: 10s;
+  }
+  .orbit-2 {
+    animation-duration: 12s;
+  }
+  .orbit-3 {
+    animation-duration: 14s;
+  }
+  .orbit-4 {
+    animation-duration: 16s;
+  }
+  .orbit-5 {
+    animation-duration: 18s;
+  }
+  .orbit-6 {
+    animation-duration: 20s;
+  }
+
+  .orbit-particle .particle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #66fcf1;
+    box-shadow:
+      0 0 10px #66fcf1,
+      0 0 20px #66fcf1;
+  }
+
+  .orbit-1 .particle {
+    left: 80px;
+    top: -6px;
+  }
+  .orbit-2 .particle {
+    left: 110px;
+    top: -6px;
+  }
+  .orbit-3 .particle {
+    left: 140px;
+    top: -6px;
+  }
+  .orbit-4 .particle {
+    left: 170px;
+    top: -6px;
+  }
+  .orbit-5 .particle {
+    left: 200px;
+    top: -6px;
+  }
+  .orbit-6 .particle {
+    left: 230px;
+    top: -6px;
+  }
+
+  @keyframes orbitSpin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Data Streams */
+  .data-stream {
+    position: absolute;
+    height: 1px;
+    left: 10%;
+    width: 80%;
+    background: linear-gradient(90deg, transparent 0%, rgba(102, 252, 241, 0.6) 50%, transparent 100%);
+    animation: streamFlow 2s ease-in-out infinite;
+  }
+
+  .stream-1 {
+    top: 30%;
+    animation-delay: 0s;
+    animation-duration: 2s;
+  }
+  .stream-2 {
+    top: 50%;
+    animation-delay: 0.5s;
+    animation-duration: 2.5s;
+  }
+  .stream-3 {
+    top: 70%;
+    animation-delay: 1s;
+    animation-duration: 3s;
+  }
+
+  @keyframes streamFlow {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  /* Ticker Animation - Infinite Seamless Scroll */
+  .ticker-container {
+    position: absolute;
+    top: 6rem;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+  }
+
+  .ticker-wrapper {
+    display: flex;
+    width: fit-content;
+    will-change: transform;
+  }
+
+  .ticker-tape {
+    display: flex;
+    gap: 1rem;
+    padding-right: 1rem;
+    flex-shrink: 0;
+    animation: tickerScroll 40s linear infinite;
+  }
+
+  .ticker-item {
+    flex-shrink: 0;
+  }
+
+  @keyframes tickerScroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .ticker-container:hover .ticker-tape {
+    animation-play-state: paused;
+  }
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 5s ease-in-out infinite;
+  }
+
+  .delay-1000 {
+    animation-delay: 1000ms;
+  }
+
+  .delay-2000 {
+    animation-delay: 2000ms;
+  }
+
+  /* Hero Animations */
+  .hero-badge {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .hero-title {
+    animation: fadeInUp 0.8s ease-out 0.2s forwards;
+    opacity: 0;
+  }
+
+  .hero-subtitle {
+    animation: fadeInUp 0.8s ease-out 0.4s forwards;
+    opacity: 0;
+  }
+
+  .hero-cta {
+    animation: fadeInUp 0.8s ease-out 0.6s forwards;
+    opacity: 0;
+  }
+
+  .hero-stats {
+    animation: fadeIn 1s ease-out 1s forwards;
+    opacity: 0;
+  }
+
+  .stat-item {
+    animation: fadeInUp 0.6s ease-out calc(1s + var(--delay)) forwards;
+    opacity: 0;
+  }
 </style>
 
-<script define:vars={{ autoplayDelay }}>
-	const slidesData = [
-		{
-			label: "Menjunjung tinggi <span class='text-brand-accent-gold'>kejujuran, amanah, dan tanggung jawab </span> dalam setiap aktivitas kelembagaan.",
-			cta_label: "Integritas",
-			colour: "#FFD700"
-		},
-		{
-			label: "Mengembangkan <span class='text-brand-secondary-dark'>ilmu pengetahuan </span> secara berkelanjutan dengan pendekatan ilmiah dan berbasis nilai Islam.",
-			cta_label: "Keilmuan",
-			colour: "#4FC3F7"
-		},
-		{
-			label: "Menjadikan <span class='text-brand-secondary'>Al-Qur'an dan Hadis </span> sebagai landasan utama dalam berpikir, bersikap, dan bertindak.",
-			cta_label: "Keislaman",
-			colour: "#81D4FA"
-		},
-		{
-			label: "Mendorong <span class='text-brand-secondary-light'>kreativitas dan pembaruan </span>dalam pendidikan, penelitian, dan pengabdian kepada masyarakat.",
-			cta_label: "Inovasi",
-			colour: "#B3E5FC"
-		},
-		{
-			label: "Mengedepankan <span class='text-brand-primary-light'>kebermanfaatan, pemberdayaan, dan keadilan sosial</span> bagi masyarakat luas.",
-			cta_label: "Kepedulian Sosial",
-			colour: "#4CAF50"
-		},
-		{
-			label: "Mengembangkan <span class='text-brand-accent-orange'>kerja sama </span>dengan berbagai pihak untuk memperluas dampak dan keberlanjutan program yayasan.",
-			cta_label: "Kolaborasi",
-			colour: "#FFD180"
-		}
-	];
+<script>
+  // Neural Network Canvas Animation
+  class NeuralNetwork {
+    canvas: HTMLCanvasElement;
+    ctx: CanvasRenderingContext2D;
+    nodes: Array<{ x: number; y: number; vx: number; vy: number }>;
+    mouse: { x: number; y: number };
+    animationId: number;
 
-	document.addEventListener("DOMContentLoaded", () => {
-		const track = document.getElementById("carousel-track");
-		const textElement = document.getElementById("slide-text");
-		if (!track || !textElement) return;
+    constructor(canvas: HTMLCanvasElement) {
+      this.canvas = canvas;
+      this.ctx = canvas.getContext("2d")!;
+      this.nodes = [];
+      this.mouse = { x: 0, y: 0 };
+      this.animationId = 0;
+      this.init();
+    }
 
-		const slides = Array.from(track.querySelectorAll(".carousel-slide"));
-		if (slides.length === 0) return;
+    init() {
+      this.resize();
+      this.createNodes();
+      this.addEventListeners();
+      this.animate();
+    }
 
-		// --- Setup untuk Looping ---
-		const slidesCount = slides.length;
-		const firstClone = slides[0].cloneNode(true);
-		const lastClone = slides[slidesCount - 1].cloneNode(true);
-		track.appendChild(firstClone);
-		track.prepend(lastClone);
+    resize() {
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
+    }
 
-		// --- Inisialisasi State ---
-		let currentIndex = 1;
-		let animationFrameId;
-		let lastTime = performance.now();
-		let timeSinceLastSlide = 0;
-		let isTransitioning = false;
+    createNodes() {
+      const nodeCount = Math.floor((this.canvas.width * this.canvas.height) / 15000);
+      this.nodes = [];
 
-		const setPositionByIndex = () => {
-			const slideWidth = slides[0].offsetWidth;
-			const currentTranslate = -currentIndex * slideWidth;
-			track.style.transform = `translateX(${currentTranslate}px)`;
-		};
+      for (let i = 0; i < nodeCount; i++) {
+        this.nodes.push({
+          x: Math.random() * this.canvas.width,
+          y: Math.random() * this.canvas.height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+        });
+      }
+    }
 
-		const setInitialPosition = () => {
-			track.style.transition = "none";
-			setPositionByIndex();
-		};
+    addEventListeners() {
+      window.addEventListener("resize", () => {
+        this.resize();
+        this.createNodes();
+      });
 
-		setInitialPosition();
+      window.addEventListener("mousemove", (e) => {
+        this.mouse.x = e.clientX;
+        this.mouse.y = e.clientY;
+      });
+    }
 
-		// Update text dengan animasi
-		const ctaLabelElement = document.getElementById("slide-cta-label");
-		const updateText = (index) => {
-			const actualIndex = index === 0 ? slidesCount - 1 : (index === slidesCount + 1 ? 0 : index - 1);
-			const slideData = slidesData[actualIndex];
-			
-			// Fade out
-			textElement.style.opacity = "0";
-			textElement.style.transform = "translateY(20px)";
-			if (ctaLabelElement) {
-				ctaLabelElement.style.opacity = "0";
-				ctaLabelElement.style.transform = "translateY(-10px)";
-			}
-			
-			setTimeout(() => {
-				textElement.innerHTML = slideData.label;
-				if (ctaLabelElement) {
-					const badge = document.getElementById('cta-label-text');
-					if (badge) badge.textContent = slideData.cta_label;				
-				// Update warna dot indicator
-				const dotIndicator = document.getElementById('cta-dot-indicator');
-				if (dotIndicator) dotIndicator.style.backgroundColor = slideData.colour;				}
-				// Fade in
-				textElement.style.opacity = "1";
-				textElement.style.transform = "translateY(0)";
-				if (ctaLabelElement) {
-					ctaLabelElement.style.opacity = "1";
-					ctaLabelElement.style.transform = "translateY(0)";
-				}
-			}, 300);
-		};
+    drawNodes() {
+      this.nodes.forEach((node, i) => {
+        // Update position
+        node.x += node.vx;
+        node.y += node.vy;
 
-		// --- Logika Looping & Autoplay ---
-		const checkIndex = () => {
-			if (currentIndex === 0) {
-				currentIndex = slidesCount;
-				setInitialPosition();
-			} else if (currentIndex === slidesCount + 1) {
-				currentIndex = 1;
-				setInitialPosition();
-			}
-			
-			// Update text saat slide berubah
-			updateText(currentIndex);
-			isTransitioning = false;
-		};
+        // Bounce off edges
+        if (node.x < 0 || node.x > this.canvas.width) node.vx *= -1;
+        if (node.y < 0 || node.y > this.canvas.height) node.vy *= -1;
 
-		const startAutoPlay = () => {
-			stopAutoPlay();
-			lastTime = performance.now();
-			animationFrameId = requestAnimationFrame(autoPlayLoop);
-		};
+        // Draw node
+        this.ctx.beginPath();
+        this.ctx.arc(node.x, node.y, 2, 0, Math.PI * 2);
+        this.ctx.fillStyle = "rgba(102, 252, 241, 0.5)";
+        this.ctx.fill();
 
-		const stopAutoPlay = () => {
-			cancelAnimationFrame(animationFrameId);
-		};
+        // Draw connections
+        this.nodes.forEach((otherNode, j) => {
+          if (i === j) return;
+          const dx = node.x - otherNode.x;
+          const dy = node.y - otherNode.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
 
-		const autoPlayLoop = (timestamp) => {
-			if (isTransitioning) {
-				animationFrameId = requestAnimationFrame(autoPlayLoop);
-				return;
-			}
+          if (distance < 150) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(node.x, node.y);
+            this.ctx.lineTo(otherNode.x, otherNode.y);
+            this.ctx.strokeStyle = `rgba(102, 252, 241, ${0.15 * (1 - distance / 150)})`;
+            this.ctx.lineWidth = 0.5;
+            this.ctx.stroke();
+          }
+        });
 
-			const deltaTime = timestamp - lastTime;
-			lastTime = timestamp;
-			timeSinceLastSlide += deltaTime;
+        // Mouse interaction
+        const dx = node.x - this.mouse.x;
+        const dy = node.y - this.mouse.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
-			if (timeSinceLastSlide >= autoplayDelay) {
-				isTransitioning = true;
-				currentIndex++;
-				track.style.transition = "transform 0.7s ease-in-out";
-				setPositionByIndex();
-				timeSinceLastSlide = 0;
-			}
+        if (distance < 200) {
+          this.ctx.beginPath();
+          this.ctx.moveTo(node.x, node.y);
+          this.ctx.lineTo(this.mouse.x, this.mouse.y);
+          this.ctx.strokeStyle = `rgba(69, 162, 158, ${0.3 * (1 - distance / 200)})`;
+          this.ctx.lineWidth = 1;
+          this.ctx.stroke();
+        }
+      });
+    }
 
-			animationFrameId = requestAnimationFrame(autoPlayLoop);
-		};
+    animate() {
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      this.drawNodes();
+      this.animationId = requestAnimationFrame(() => this.animate());
+    }
+  }
 
-		// Handle visibility change
-		document.addEventListener("visibilitychange", () => {
-			if (document.hidden) {
-				stopAutoPlay();
-			} else {
-				startAutoPlay();
-			}
-		});
+  // Generate Neural Nodes (DOM-based, like NeuralNetwork.tsx)
+  interface DOMNode {
+    id: number;
+    x: number;
+    y: number;
+    size: number;
+    delay: number;
+  }
 
-		// Attach event listeners
-		track.addEventListener("transitionend", checkIndex);
-		window.addEventListener("resize", setInitialPosition);
+  interface Connection {
+    id: number;
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+    delay: number;
+  }
 
-		// Initialize text animation
-		textElement.style.transition = "opacity 0.3s ease-out, transform 0.3s ease-out";
-		textElement.style.opacity = "1";
-		if (ctaLabelElement) {
-			ctaLabelElement.style.transition = "opacity 0.3s ease-out, transform 0.3s ease-out";
-			ctaLabelElement.style.opacity = "1";
-		}
+  function generateNeuralNodes() {
+    const nodesContainer = document.getElementById("neural-nodes");
+    const svgContainer = document.getElementById("neural-connections");
 
-		startAutoPlay();
-	});
+    if (!nodesContainer || !svgContainer) return;
+
+    // Generate nodes
+    const nodes: DOMNode[] = [];
+    for (let i = 0; i < 20; i++) {
+      nodes.push({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 8 + 4,
+        delay: Math.random() * 2,
+      });
+    }
+
+    // Create node elements
+    nodes.forEach((node) => {
+      const nodeEl = document.createElement("div");
+      nodeEl.className = "neural-node";
+      nodeEl.style.cssText = `
+        left: ${node.x}%;
+        top: ${node.y}%;
+        width: ${node.size}px;
+        height: ${node.size}px;
+        animation-delay: ${node.delay}s;
+        animation-duration: ${2 + Math.random()}s;
+      `;
+      nodesContainer.appendChild(nodeEl);
+    });
+
+    // Generate connections between nearby nodes
+    const connections: Connection[] = [];
+    let connId = 0;
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 30 && connections.length < 25) {
+          connections.push({
+            id: connId++,
+            x1: nodes[i].x,
+            y1: nodes[i].y,
+            x2: nodes[j].x,
+            y2: nodes[j].y,
+            delay: Math.random() * 3,
+          });
+        }
+      }
+    }
+
+    // Create SVG connections
+    connections.forEach((conn) => {
+      const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      line.setAttribute("x1", `${conn.x1}%`);
+      line.setAttribute("y1", `${conn.y1}%`);
+      line.setAttribute("x2", `${conn.x2}%`);
+      line.setAttribute("y2", `${conn.y2}%`);
+      line.setAttribute("stroke", "#66FCF1");
+      line.setAttribute("stroke-width", "1");
+      line.setAttribute("stroke-opacity", "0.3");
+      line.style.cssText = `
+        animation: connectionPulse 3s ease-in-out ${conn.delay}s infinite;
+      `;
+      svgContainer.appendChild(line);
+    });
+  }
+
+  // Add connection animation to stylesheet
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = `
+    @keyframes connectionPulse {
+      0%, 100% {
+        stroke-opacity: 0;
+        stroke-dasharray: 0 100;
+      }
+      50% {
+        stroke-opacity: 0.5;
+        stroke-dasharray: 100 0;
+      }
+    }
+  `;
+  document.head.appendChild(styleSheet);
+
+  // Initialize Neural Network
+  document.addEventListener("DOMContentLoaded", () => {
+    const canvas = document.getElementById("neural-network") as HTMLCanvasElement;
+    if (canvas) {
+      new NeuralNetwork(canvas);
+    }
+
+    // Generate DOM-based neural nodes
+    generateNeuralNodes();
+  });
 </script>

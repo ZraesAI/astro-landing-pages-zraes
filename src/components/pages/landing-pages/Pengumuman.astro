@@ -1,200 +1,189 @@
 ---
-import { ArrowRight, ArrowUpRight } from "@lucide/astro";
+import { ArrowRight, ArrowUpRight, Rocket, Shield, Zap, Globe, Users, MessageCircle, Github, Twitter } from "@lucide/astro";
 
-const title = "Berita & Pengumuman Terbaru";
-const linkHref = "/berita";
+const updates = [
+  {
+    version: "v2.5.0",
+    date: "Jan 2026",
+    title: "Multi-Chain Support Launch",
+    description: "Extended support for Solana, Avalanche, and Arbitrum networks with real-time cross-chain analytics.",
+    badge: "New",
+    badgeColor: "#BFFF00",
+  },
+  {
+    version: "v2.4.0",
+    date: "Dec 2025",
+    title: "Advanced AI Model Update",
+    description: "Upgraded neural network for 15% improved accuracy in detecting bot trading patterns.",
+    badge: "AI",
+    badgeColor: "#66FCF1",
+  },
+  {
+    version: "v2.3.0",
+    date: "Nov 2025",
+    title: "Telegram Bot Integration",
+    description: "Seamless Telegram bot commands for instant portfolio analysis and alerts.",
+    badge: "Integration",
+    badgeColor: "#45A29E",
+  },
+];
 
-const pengumumanData = [
-  {
-    slug: "program-beasiswa-2025",
-    judul: "Program Beasiswa Yayasan Sawiyan 2025",
-    thumbnail: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=600&fit=crop",
-    url_thumbnail: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&h=600&fit=crop",
-    isi: "Yayasan Sawiyan membuka program beasiswa untuk siswa berprestasi dan keluarga kurang mampu. Program ini bertujuan untuk memberikan kesempatan pendidikan yang lebih baik bagi generasi penerus bangsa.",
-    date_created: "2024-11-15T10:00:00",
-  },
-  {
-    slug: "bantuan-kemanusiaan-2025",
-    judul: "Kegiatan Bantuan Kemanusiaan di Daerah Terdampak Bencana",
-    thumbnail: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&h=600&fit=crop",
-    url_thumbnail: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&h=600&fit=crop",
-    isi: "Yayasan Sawiyan menggelar program bantuan kemanusiaan untuk korban bencana alam. Bantuan meliputi bahan makanan, pakaian, dan kebutuhan pokok lainnya. Mari bersama-sama membantu mereka yang membutuhkan.",
-    date_created: "2024-11-10T14:30:00",
-  },
-  {
-    slug: "kegiatan-keagamaan-2025",
-    judul: "Kegiatan Rutin Kajian Keagamaan Bulanan",
-    thumbnail: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&h=600&fit=crop",
-    url_thumbnail: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&h=600&fit=crop",
-    isi: "Yayasan Sawiyan mengadakan kajian keagamaan rutin setiap bulan yang terbuka untuk umum. Kegiatan ini bertujuan untuk memperdalam pemahaman keagamaan dan memperkuat ukhuwah islamiyah.",
-    date_created: "2024-11-08T09:15:00",
-  },
-  {
-    slug: "kampanye-lingkungan-2025",
-    judul: "Kampanye Peduli Lingkungan: Aksi Bersih-Bersih",
-    thumbnail: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&h=600&fit=crop",
-    url_thumbnail: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&h=600&fit=crop",
-    isi: "Yayasan Sawiyan menggelar aksi bersih-bersih lingkungan sebagai bentuk kepedulian terhadap kelestarian alam. Ayo ikut serta dalam kegiatan positif ini untuk menciptakan lingkungan yang lebih baik.",
-    date_created: "2024-11-05T16:45:00",
-  },
-  {
-    slug: "penyaluran-zakat-2025",
-    judul: "Penyaluran Zakat Fitrah dan Zakat Mal Tahun 2025",
-    thumbnail: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&h=600&fit=crop",
-    url_thumbnail: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&h=600&fit=crop",
-    isi: "Yayasan Sawiyan membuka penyaluran zakat fitrah dan zakat mal untuk disalurkan kepada mustahik yang berhak. Mari tunaikan kewajiban zakat kita melalui yayasan yang terpercaya.",
-    date_created: "2024-11-01T11:20:00",
-  },
-  {
-    slug: "pelatihan-keterampilan-2025",
-    judul: "Pelatihan Keterampilan untuk Pemberdayaan Masyarakat",
-    thumbnail: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop",
-    url_thumbnail: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop",
-    isi: "Program pelatihan keterampilan bagi masyarakat untuk meningkatkan kemampuan dan peluang ekonomi. Program ini mencakup berbagai bidang seperti kerajinan, pertanian, dan wirausaha.",
-    date_created: "2024-10-28T13:00:00",
-  },
+const partners = [
+  { name: "Ethereum", logo: "ETH" },
+  { name: "Polygon", logo: "MATIC" },
+  { name: "Binance", logo: "BNB" },
+  { name: "Solana", logo: "SOL" },
+  { name: "Avalanche", logo: "AVAX" },
 ];
 ---
 
-<section class="bg-gradient-to-br from-gray-100 via-white to-gray-100 py-16 lg:py-24 relative">
-  <!-- Background decorative elements -->
-  <div class="absolute top-0 right-0 w-96 h-96 bg-brand-primary/5 rounded-full blur-3xl -z-10"></div>
-  <div class="absolute bottom-0 left-0 w-96 h-96 bg-brand-secondary/5 rounded-full blur-3xl -z-10"></div>
+<section class="bg-brand-surface/30 py-20 lg:py-32 relative overflow-hidden">
+  <!-- Background -->
+  <div class="absolute inset-0 bg-gradient-to-b from-brand-background via-transparent to-brand-background"></div>
+  <div class="absolute inset-0 opacity-[0.015] grid-pattern"></div>
 
-  <div class="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
-    <div class="flex flex-col gap-12">
-      {/* Header Section */}
-      <div class="flex gap-7 flex-col lg:flex-row lg:items-center lg:justify-between">
-        <div class="lg:w-7/12 space-y-4 mb-10">
-          {/* Badge */}
-          <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-full border border-brand-primary/20">
-            <span class="text-sm font-medium text-brand-primary uppercase tracking-wider">Berita Terkini</span>
-          </div>
+  <!-- Glowing Orbs -->
+  <div class="absolute top-1/4 right-0 w-96 h-96 bg-brand-primary/5 rounded-full blur-[150px]"></div>
+  <div class="absolute bottom-1/4 left-0 w-96 h-96 bg-[#BFFF00]/5 rounded-full blur-[150px]"></div>
 
-          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-accent-gold bg-clip-text text-transparent tracking-tight leading-tight pb-2">
-            {title}
-          </h2>
-        </div>
-
-        {/* Link Section dengan styling tema */}
-        <div class="flex justify-end items-center">
-          <a
-            href={linkHref}
-            class="group relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 overflow-hidden"
-          >
-            {/* Shine effect */}
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-            <span class="relative z-10">Lihat Berita Lain</span>
-            <ArrowUpRight class="w-5 h-5 relative z-10 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </a>
-        </div>
+  <div class="container mx-auto px-6 max-w-7xl relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-16 space-y-4">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#BFFF00]/30 bg-[#BFFF00]/5">
+        <Rocket class="w-4 h-4 text-[#BFFF00]" />
+        <span class="text-sm text-[#BFFF00] font-medium uppercase tracking-wider">Latest Updates</span>
       </div>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+        Platform <span class="text-glow bg-gradient-to-r from-brand-primary to-[#BFFF00] bg-clip-text text-transparent">Changelog</span>
+      </h2>
+      <p class="text-[#C5C6C7] max-w-2xl mx-auto text-lg">Track our continuous improvements and new features deployed to mainnet.</p>
+    </div>
 
-      {/* Carousel Section */}
-      <div class="embla-carousel-pengumuman relative py-8 pb-16">
-        <div class="embla__viewport overflow-hidden px-2 py-4">
-          <div class="embla__container flex gap-6">
-            {
-              pengumumanData.map((pengumuman: { slug: string; judul: string; thumbnail: string; url_thumbnail: string; isi: string; date_created: string }) => (
-                <div class="embla__slide min-w-0 flex-shrink-0 basis-full md:basis-[calc(50%-12px)] lg:basis-[calc(33.333%-16px)]">
-                  {/* Card Container dengan depth dan shadow sesuai tema */}
-                  <div class="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200/50 bg-white shadow-lg hover:shadow-2xl transition-all duration-300 relative">
-                    {/* Decorative gradient accent */}
-                    <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-accent-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20" />
+    <!-- Updates Timeline -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-20">
+      {
+        updates.map((update, i) => (
+          <div class="update-card group relative p-6 rounded-2xl bg-brand-background/50 backdrop-blur-sm border border-white/5 hover:border-brand-primary/30 transition-all duration-500" style={`--delay: ${i * 0.1}s`}>
+            {/* Glow effect on hover */}
+            <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={`box-shadow: 0 0 40px ${update.badgeColor}10`} />
 
-                    {/* Decorative corner element */}
-                    <div class="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-brand-secondary/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+            {/* Header */}
+            <div class="flex items-center justify-between mb-4 relative z-10">
+              <div class="flex items-center gap-3">
+                <span class="text-white/60 font-mono text-sm">{update.version}</span>
+                <span class="text-[#C5C6C7]/60 text-sm">•</span>
+                <span class="text-[#C5C6C7]/60 text-sm">{update.date}</span>
+              </div>
+              <span class="px-2 py-1 rounded-md text-xs font-semibold" style={`background: ${update.badgeColor}15; color: ${update.badgeColor}`}>
+                {update.badge}
+              </span>
+            </div>
 
-                    {/* Block 1: Gambar dengan overlay */}
-                    <a href={`/berita/${pengumuman.slug}`} class="block shrink-0 relative overflow-hidden">
-                      <img src={pengumuman.url_thumbnail} alt={`Thumbnail untuk ${pengumuman.judul}`} class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                      {/* Gradient overlay on hover */}
-                      <div class="absolute inset-0 bg-gradient-to-t from-brand-primary/0 to-brand-primary/0 group-hover:from-brand-primary/20 group-hover:to-transparent transition-all duration-300" />
-                    </a>
+            {/* Content */}
+            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-primary transition-colors relative z-10">{update.title}</h3>
+            <p class="text-[#C5C6C7]/80 text-sm leading-relaxed relative z-10">{update.description}</p>
 
-                    {/* Block 2: Konten Teks */}
-                    <div class="flex flex-grow flex-col p-6 relative">
-                      {/* Background decorative element */}
-                      <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand-secondary/5 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                      <span class="text-sm text-gray-500 font-medium relative z-10">
-                        {new Intl.DateTimeFormat("id-ID", {
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                          hour: "2-digit",
-                          minute: "2-digit",
-                          timeZoneName: "short",
-                        }).format(new Date(pengumuman.date_created))}
-                      </span>
-                      <h5 class="my-2 text-xl font-bold leading-tight text-gray-900 relative z-10">
-                        <a href={`/berita/${pengumuman.slug}`} class="hover:text-brand-primary transition-colors duration-200">
-                          {pengumuman.judul}
-                        </a>
-                      </h5>
-                      <p class="text-base leading-relaxed text-gray-600 relative z-10 mb-4">{pengumuman.isi?.replace(/<[^>]*>?/gm, " ").substring(0, 100) + "..."}</p>
-
-                      {/* Block 3: Tombol "Read More" dengan enhanced styling */}
-                      <div class="mt-auto relative z-10">
-                        <a href={`/berita/${pengumuman.slug}`} class="group/btn inline-flex items-center gap-2 font-semibold text-brand-primary hover:text-brand-secondary transition-colors duration-200">
-                          <span class="relative">
-                            Baca Selengkapnya
-                            <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-brand-primary to-brand-secondary group-hover/btn:w-full transition-all duration-300" />
-                          </span>
-                          <ArrowRight class="h-4 w-4 transition-transform duration-200 group-hover/btn:translate-x-1" />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))
-            }
+            {/* Bottom border glow */}
+            <div class="absolute bottom-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={`background: linear-gradient(90deg, transparent, ${update.badgeColor}, transparent)`} />
           </div>
+        ))
+      }
+    </div>
+
+    <!-- Supported Networks -->
+    <div class="mb-20">
+      <p class="text-center text-[#C5C6C7]/60 text-sm uppercase tracking-wider mb-8">Supported Networks</p>
+      <div class="flex flex-wrap justify-center items-center gap-8 lg:gap-12">
+        {
+          partners.map((partner, i) => (
+            <div class="partner-item flex items-center gap-2 px-4 py-2 rounded-lg bg-brand-surface/30 border border-white/5 hover:border-brand-primary/20 transition-all duration-300" style={`--delay: ${i * 0.05}s`}>
+              <div class="w-8 h-8 rounded-full bg-brand-primary/10 flex items-center justify-center">
+                <span class="text-brand-primary font-bold text-xs">{partner.logo}</span>
+              </div>
+              <span class="text-white/70 font-medium">{partner.name}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="relative p-8 lg:p-12 rounded-3xl bg-gradient-to-r from-brand-surface/60 to-brand-surface/40 backdrop-blur-xl border border-white/10 overflow-hidden">
+      {/* Background decoration */}
+      <div class="absolute top-0 right-0 w-64 h-64 bg-[#BFFF00]/10 rounded-full blur-[100px]"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 bg-brand-primary/10 rounded-full blur-[100px]"></div>
+
+      <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="text-center lg:text-left">
+          <h3 class="text-2xl lg:text-3xl font-bold text-white mb-3">Ready to Audit Your Trading Bots?</h3>
+          <p class="text-[#C5C6C7] max-w-xl">Join thousands of traders using Zraes AI for trustless on-chain verification.</p>
         </div>
 
-        {/* Navigation Buttons */}
-        <button
-          class="embla__prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 hidden lg:flex items-center justify-center w-12 h-12 bg-gradient-to-r from-brand-primary to-brand-secondary backdrop-blur-sm rounded-full shadow-lg text-white hover:shadow-xl hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 z-20"
-        >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-        </button>
-        <button
-          class="embla__next absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 hidden lg:flex items-center justify-center w-12 h-12 bg-gradient-to-r from-brand-primary to-brand-secondary backdrop-blur-sm rounded-full shadow-lg text-white hover:shadow-xl hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 z-20"
-        >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-        </button>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="https://t.me/Gilang_Bot"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex items-center gap-2 px-6 py-3 bg-[#BFFF00] text-brand-background font-bold rounded-xl hover:shadow-[0_0_30px_rgba(191,255,0,0.4)] transition-all duration-300"
+          >
+            <MessageCircle class="w-5 h-5" />
+            Start on Telegram
+            <ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </a>
+
+          <div class="flex items-center gap-3">
+            <a href="#" class="p-3 rounded-xl bg-brand-surface/50 border border-white/10 hover:border-brand-primary/30 text-[#C5C6C7] hover:text-brand-primary transition-all duration-300">
+              <Github class="w-5 h-5" />
+            </a>
+            <a href="#" class="p-3 rounded-xl bg-brand-surface/50 border border-white/10 hover:border-brand-primary/30 text-[#C5C6C7] hover:text-brand-primary transition-all duration-300">
+              <Twitter class="w-5 h-5" />
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<script>
-  import EmblaCarousel from "embla-carousel";
+<style>
+  .grid-pattern {
+    background-image: linear-gradient(rgba(102, 252, 241, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(102, 252, 241, 0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
 
-  const emblaRoot = document.querySelector(".embla-carousel-pengumuman");
+  .text-glow {
+    text-shadow:
+      0 0 40px rgba(102, 252, 241, 0.4),
+      0 0 80px rgba(102, 252, 241, 0.2);
+  }
 
-  if (emblaRoot) {
-    const viewport = emblaRoot.querySelector<HTMLElement>(".embla__viewport");
-    const prevBtn = emblaRoot.querySelector<HTMLButtonElement>(".embla__prev");
-    const nextBtn = emblaRoot.querySelector<HTMLButtonElement>(".embla__next");
+  .update-card {
+    animation: fadeInUp 0.8s ease-out calc(0.2s + var(--delay)) forwards;
+    opacity: 0;
+  }
 
-    if (viewport && prevBtn && nextBtn) {
-      const emblaApi = EmblaCarousel(viewport, { loop: true, align: "start" });
+  .partner-item {
+    animation: fadeIn 0.6s ease-out calc(0.5s + var(--delay)) forwards;
+    opacity: 0;
+  }
 
-      const updateArrowButtons = () => {
-        if (!emblaApi) return;
-        prevBtn.disabled = !emblaApi.canScrollPrev();
-        nextBtn.disabled = !emblaApi.canScrollNext();
-      };
-
-      // REVISI: Gunakan arrow function untuk menjaga konteks 'this'
-      prevBtn.addEventListener("click", () => emblaApi.scrollPrev(), false);
-      nextBtn.addEventListener("click", () => emblaApi.scrollNext(), false);
-
-      emblaApi.on("select", updateArrowButtons);
-      emblaApi.on("reInit", updateArrowButtons);
-
-      updateArrowButtons();
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
-</script>
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>

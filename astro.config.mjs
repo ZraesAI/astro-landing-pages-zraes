@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import node from "@astrojs/node";
+import vercel from "@astrojs/vercel";
 import react from "@astrojs/react";
 import tailwindcss from "@tailwindcss/vite";
 
@@ -8,9 +8,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
 	output: "server",
 
-	adapter: node({
-		mode: "standalone",
-	}),
+	adapter: vercel({}),
 
 	integrations: [react()],
 
@@ -23,5 +21,5 @@ export default defineConfig({
     port: 4321
   },
 
-	base: `${import.meta.env.BASE_URL}`
+	base: `${import.meta.env.BASE_URL ?? '/'}`,
 });

@@ -1,49 +1,49 @@
 @import "tailwindcss";
 @plugin '@tailwindcss/typography';
 
-@import "@fontsource-variable/merriweather-sans";
+@import "@fontsource-variable/space-grotesk";
 
 :root {
-  /* Primary Colors - Brand Green */
-  --color-primary: #388e3c;
-  --color-primary-dark: #2e7d32;
-  --color-primary-darker: #1b5e20;
-  --color-primary-light: #4caf50;
-  --color-primary-lighter: #43a047;
+  /* Primary Colors - Cyan/Electric Blue */
+  --color-primary: #66fcf1;
+  --color-primary-dark: #45a29e;
+  --color-primary-darker: #3a8a85;
+  --color-primary-light: #8ffdf5;
+  --color-primary-lighter: #a8fef8;
 
-  /* Secondary Colors - Blue */
-  --color-secondary: #81d4fa;
-  --color-secondary-light: #b3e5fc;
-  --color-secondary-dark: #4fc3f7;
+  /* Secondary Colors - Teal */
+  --color-secondary: #45a29e;
+  --color-secondary-light: #5cb8b4;
+  --color-secondary-dark: #3a8a85;
 
   /* Accent Colors */
-  --color-accent-orange: #ffd180;
-  --color-accent-gold: #ffd700;
+  --color-accent-orange: #66fcf1;
+  --color-accent-gold: #45a29e;
 
-  /* Neutral Colors */
-  --color-background: #f5f5f5;
-  --color-surface: #ffffff;
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #4a4a4a;
-  --color-text-tertiary: #6b7280;
-  --color-border: #e5e7eb;
+  /* Neutral Colors - Dark Theme */
+  --color-background: #0b0c10;
+  --color-surface: #1f2833;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #c5c6c7;
+  --color-text-tertiary: #9a9b9c;
+  --color-border: #2d3748;
 
   /* Semantic Usage */
   --color-selection-bg: var(--color-primary);
-  --color-selection-text: var(--color-surface);
-  --color-selection-bg-inverse: var(--color-accent-gold);
+  --color-selection-text: var(--color-background);
+  --color-selection-bg-inverse: var(--color-secondary);
   --color-selection-text-inverse: var(--color-text-primary);
 
   /* Gradient Combinations */
   --gradient-primary: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-darker) 100%);
   --gradient-primary-hover: linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
   --gradient-primary-active: linear-gradient(180deg, var(--color-primary-darker) 0%, var(--color-primary-dark) 100%);
-  --gradient-brand: linear-gradient(to right, var(--color-primary), var(--color-secondary), var(--color-accent-gold));
-  --gradient-brand-alt: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  --gradient-brand: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+  --gradient-brand-alt: linear-gradient(to right, var(--color-primary), var(--color-secondary-dark));
 }
 
 @theme {
-  --font-merriweather-sans: "Merriweather Sans Variable", "sans-serif";
+  --font-space-grotesk: "Space Grotesk Variable", sans-serif;
 
   /* Tailwind Color Extensions */
   --color-brand-primary: var(--color-primary);
@@ -66,6 +66,7 @@
 
 html,
 body {
+  font-family: var(--font-space-grotesk), sans-serif;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
