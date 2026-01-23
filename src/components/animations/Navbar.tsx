@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronDown, MessageCircle, Zap, X, Menu } from "lucide-react";
+import { ChevronDown, Send, Zap, X, Menu } from "lucide-react";
 
 interface SubSubItem {
   name: string;
@@ -123,7 +123,7 @@ export default function Navbar({ telegramBotUrl = "https://t.me/Gilang_Bot" }: N
               rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#66fcf1] to-[#45a29e] text-[#0b0c10] font-bold text-sm rounded-xl hover:shadow-[0_0_30px_rgba(102,252,241,0.5)] transition-all duration-300 hover:scale-105 active:scale-95"
             >
-              <MessageCircle className="w-4 h-4" />
+              <Send className="w-4 h-4" />
               <span className="hidden md:inline">TELEGRAM BOT</span>
               <span className="md:hidden">BOT</span>
             </a>
@@ -165,7 +165,7 @@ export default function Navbar({ telegramBotUrl = "https://t.me/Gilang_Bot" }: N
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full px-6 py-4 mb-6 bg-gradient-to-r from-[#66fcf1] to-[#45a29e] text-[#0b0c10] font-bold rounded-xl hover:shadow-[0_0_30px_rgba(102,252,241,0.4)] transition-all duration-300 active:scale-95"
           >
-            <MessageCircle className="w-5 h-5" />
+            <Send className="w-5 h-5" />
             TELEGRAM BOT
           </a>
 
