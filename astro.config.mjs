@@ -6,28 +6,28 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-	output: "server",
+  output: "server",
 
-	adapter: vercel({}),
+  adapter: vercel({}),
 
-	integrations: [react()],
+  integrations: [react()],
 
-	vite: {
-		plugins: [tailwindcss()],
-	},
+  vite: {
+    plugins: [tailwindcss()],
+  },
 
-	server: {
-    host: '0.0.0.0',
-    port: 4321
+  server: {
+    host: "0.0.0.0",
+    port: 4321,
   },
 
   i18n: {
     defaultLocale: "en",
     locales: ["en", "id"],
     routing: {
-      prefixDefaultLocale: false
-    }
+      prefixDefaultLocale: false,
+    },
   },
 
-	base: `${import.meta.env.BASE_URL ?? '/'}`,
+  // base: removed to rely on default behavior
 });
