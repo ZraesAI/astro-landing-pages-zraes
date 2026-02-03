@@ -1,31 +1,27 @@
 ---
 import { Target, Shield, FileCheck, TrendingUp, Brain, Lock, Zap, BarChart2 } from "@lucide/astro";
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 // Feature cards data
 const features = [
   {
-    title: "APY Accuracy",
+    title: t("profile.feature.pattern.title"),
     value: "99.7%",
-    description: "Real-time yield verification with on-chain data",
+    description: t("profile.feature.pattern.desc"),
     icon: Target,
     color: "#BFFF00",
     trend: "+12.4%",
   },
   {
-    title: "Risk Score",
+    title: t("profile.feature.privacy.title"),
     value: "A+",
-    description: "Multi-factor analysis of trading strategies",
+    description: t("profile.feature.privacy.desc"),
     icon: Shield,
     color: "#66FCF1",
     trend: "Low Risk",
-  },
-  {
-    title: "Verified Contracts",
-    value: "15,847",
-    description: "Audited smart contracts across all chains",
-    icon: FileCheck,
-    color: "#45A29E",
-    trend: "+847 this month",
   },
 ];
 
@@ -50,15 +46,16 @@ const metrics = [
       <div class="flex-1 space-y-8 text-center lg:text-left">
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-primary/30 bg-brand-primary/5 mx-auto lg:mx-0">
           <Zap class="w-4 h-4 text-brand-primary" />
-          <span class="text-xs md:text-sm text-brand-primary font-bold uppercase tracking-widest">Instant Analysis</span>
+          <span class="text-xs md:text-sm text-brand-primary font-bold uppercase tracking-widest">{t("profile.section.badge")}</span>
         </div>
 
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-          Your Personal <br class="hidden lg:block" />
-          <span class="text-glow bg-gradient-to-r from-[#BFFF00] to-brand-primary bg-clip-text text-transparent">AI Market Analyst</span>
+          {t("profile.section.title")}
+          <br class="hidden lg:block" />
+          <span class="text-glow bg-gradient-to-r from-[#BFFF00] to-brand-primary bg-clip-text text-transparent">{t("profile.section.title.highlight")}</span>
         </h2>
 
-        <p class="text-[#C5C6C7] text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">Stop staring at complex dashboards. Just type a ticker, and get professional-grade technical analysis delivered directly to your Telegram in seconds.</p>
+        <p class="text-[#C5C6C7] text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">{t("profile.section.desc")}</p>
 
         <!-- Feature List -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
@@ -66,26 +63,27 @@ const metrics = [
             <div class="w-10 h-10 rounded-lg bg-[#BFFF00]/10 flex items-center justify-center mb-3">
               <TrendingUp class="w-5 h-5 text-[#BFFF00]" />
             </div>
-            <h4 class="text-white font-bold mb-1">Pattern Detection</h4>
-            <p class="text-sm text-[#C5C6C7]/70">Auto-identifies wedges, flags, and RSI divergences.</p>
+            <h4 class="text-white font-bold mb-1">{t("profile.feature.pattern.title")}</h4>
+            <p class="text-sm text-[#C5C6C7]/70">{t("profile.feature.pattern.desc")}</p>
           </div>
 
           <div class="feature-item p-4 rounded-xl bg-brand-surface/30 border border-white/5 hover:border-brand-primary/30 transition-all duration-300">
             <div class="w-10 h-10 rounded-lg bg-brand-primary/10 flex items-center justify-center mb-3">
               <Lock class="w-5 h-5 text-brand-primary" />
             </div>
-            <h4 class="text-white font-bold mb-1">Private & Secure</h4>
-            <p class="text-sm text-[#C5C6C7]/70">Your strategies and queries remain 100% encrypted.</p>
+            <h4 class="text-white font-bold mb-1">{t("profile.feature.privacy.title")}</h4>
+            <p class="text-sm text-[#C5C6C7]/70">{t("profile.feature.privacy.desc")}</p>
           </div>
         </div>
 
         <div class="pt-6">
-          <a 
-          href={import.meta.env.TELEGRAM_BOT_URL} 
-          target="_blank" 
-          class="btn-cyber group relative px-8 py-4 bg-[#BFFF00] text-black font-bold uppercase tracking-wider text-sm transition-all hover:bg-[#9FE000] clip-path-cyber inline-flex">
+          <a
+            href={import.meta.env.TELEGRAM_BOT_URL}
+            target="_blank"
+            class="btn-cyber group relative px-8 py-4 bg-[#BFFF00] text-black font-bold uppercase tracking-wider text-sm transition-all hover:bg-[#9FE000] clip-path-cyber inline-flex"
+          >
             <span class="relative z-10 flex items-center gap-2">
-              <span class="text-lg">Try the Bot Now</span>
+              <span class="text-lg">{t("profile.cta.button")}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20"
@@ -115,7 +113,7 @@ const metrics = [
               <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
               <div class="w-3 h-3 rounded-full bg-green-500"></div>
             </div>
-            <div class="text-[#C5C6C7] text-xs font-mono tracking-widest">ZRAES_BOT_TERMINAL</div>
+            <div class="text-[#C5C6C7] text-xs font-mono tracking-widest">{t("profile.terminal.title")}</div>
           </div>
 
           <!-- Chat Area -->
@@ -135,7 +133,7 @@ const metrics = [
                 <div class="w-6 h-6 rounded bg-brand-primary/20 flex items-center justify-center border border-brand-primary/30">
                   <Brain class="w-3 h-3 text-brand-primary" />
                 </div>
-                <span class="text-xs text-brand-primary">Zraes AI • Bot</span>
+                <span class="text-xs text-brand-primary">{t("profile.bot.name")}</span>
               </div>
 
               <div class="bg-[#1A1A1A] border border-brand-primary/20 rounded-2xl rounded-tl-none p-1 overflow-hidden shadow-[0_0_20px_rgba(102,252,241,0.1)]">
@@ -156,8 +154,9 @@ const metrics = [
                       <span class="text-[#BFFF00]">+2.4%</span>
                     </div>
                     <div class="text-[10px] text-[#C5C6C7]">
-                      Signal: <span class="text-[#BFFF00]">STRONG BUY</span><br />
-                      Target: 10,450
+                      {t("profile.bot.signal")}
+                      <span class="text-[#BFFF00]">{t("profile.bot.signal.value")}</span><br />
+                      {t("profile.bot.target")} 10,450
                     </div>
                   </div>
                 </div>

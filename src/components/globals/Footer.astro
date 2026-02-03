@@ -1,6 +1,9 @@
 ---
 import { Github, Twitter, MessageCircle, Mail, Zap, Send, ExternalLink, Shield, Code, BookOpen } from "lucide-astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const currentYear = new Date().getFullYear();
 const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilang_Bot";
 ---
@@ -20,7 +23,7 @@ const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilan
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12 mb-12">
       <!-- Brand Section -->
       <div class="lg:col-span-2">
-        <a href="/" class="inline-block mb-6 group">
+        <a href={`/${lang === "id" ? "id" : ""}`} class="inline-block mb-6 group">
           <span class="text-2xl md:text-3xl font-bold tracking-wider flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center group-hover:shadow-[0_0_25px_rgba(102,252,241,0.4)] transition-all duration-300">
               <Zap class="w-6 h-6 text-brand-background" />
@@ -28,13 +31,13 @@ const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilan
             <span class="bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary bg-clip-text text-transparent">ZRAES AI</span>
           </span>
         </a>
-        <p class="text-sm text-brand-text-secondary leading-relaxed mb-6 max-w-sm">Trustless performance verification for trading bots powered by decentralized intelligence and blockchain technology.</p>
+        <p class="text-sm text-brand-text-secondary leading-relaxed mb-6 max-w-sm">{t("footer.brand.desc")}</p>
 
         <!-- Live Status & Bot Button -->
         <div class="flex flex-wrap items-center gap-3">
           <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-surface/80 rounded-full border border-brand-primary/20">
             <span class="w-2 h-2 rounded-full bg-brand-primary animate-pulse shadow-[0_0_10px_rgba(102,252,241,0.5)]"></span>
-            <span class="text-xs text-brand-primary font-medium">All Systems Operational</span>
+            <span class="text-xs text-brand-primary font-medium">{t("footer.system.status")}</span>
           </div>
           <a
             href={TELEGRAM_BOT_URL}
@@ -43,7 +46,7 @@ const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilan
             class="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-brand-primary/20 to-brand-secondary/20 rounded-full border border-brand-primary/30 hover:border-brand-primary/60 transition-all duration-300 group"
           >
             <MessageCircle class="w-4 h-4 text-brand-primary" />
-            <span class="text-xs text-brand-primary font-medium">Try the Bot</span>
+            <span class="text-xs text-brand-primary font-medium">{t("footer.button.try")}</span>
             <ExternalLink class="w-3 h-3 text-brand-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
           </a>
         </div>
@@ -53,31 +56,31 @@ const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilan
       <div>
         <h3 class="text-sm font-bold mb-5 text-white uppercase tracking-wider flex items-center gap-2">
           <div class="w-1 h-4 bg-gradient-to-b from-brand-primary to-brand-secondary rounded-full"></div>
-          Platform
+          {t("footer.col.platform")}
         </h3>
         <ul class="space-y-3">
           <li>
-            <a href="/profil" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
+            <a href="#" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
               <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
-              Bot Analytics
-            </a>
-          </li>
-          <li>
-            <a href="/program" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
-              <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
-              Risk Assessment
-            </a>
-          </li>
-          <li>
-            <a href="/berita" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
-              <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
-              Documentation
+              {t("footer.link.analytics")}
             </a>
           </li>
           <li>
             <a href="#" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
               <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
-              API Reference
+              {t("footer.link.risk")}
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
+              <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
+              {t("footer.link.docs")}
+            </a>
+          </li>
+          <li>
+            <a href="#" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
+              <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
+              {t("footer.link.api")}
             </a>
           </li>
         </ul>
@@ -87,31 +90,31 @@ const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilan
       <div>
         <h3 class="text-sm font-bold mb-5 text-white uppercase tracking-wider flex items-center gap-2">
           <div class="w-1 h-4 bg-gradient-to-b from-brand-primary to-brand-secondary rounded-full"></div>
-          Resources
+          {t("footer.col.resources")}
         </h3>
         <ul class="space-y-3">
           <li>
             <a href="#" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
               <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
-              Whitepaper
+              {t("footer.link.whitepaper")}
             </a>
           </li>
           <li>
             <a href="#" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
               <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
-              Smart Contracts
+              {t("footer.link.contracts")}
             </a>
           </li>
           <li>
             <a href="#" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
               <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
-              Security Audits
+              {t("footer.link.audit")}
             </a>
           </li>
           <li>
             <a href="#" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
               <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
-              Bug Bounty
+              {t("footer.link.bugbounty")}
             </a>
           </li>
         </ul>
@@ -121,7 +124,7 @@ const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilan
       <div>
         <h3 class="text-sm font-bold mb-5 text-white uppercase tracking-wider flex items-center gap-2">
           <div class="w-1 h-4 bg-gradient-to-b from-brand-primary to-brand-secondary rounded-full"></div>
-          Community
+          {t("footer.col.community")}
         </h3>
         <div class="flex flex-wrap gap-3">
           <a
@@ -167,16 +170,18 @@ const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilan
     <div class="pt-8 border-t border-brand-primary/10">
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
         <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-brand-text-secondary">
-          <span>© {currentYear} ZRAES AI. All rights reserved.</span>
+          <span>© {currentYear} {t("footer.rights")}</span>
           <span class="hidden md:inline text-brand-primary/30">|</span>
           <span class="flex items-center gap-1">
-            Built with <span class="text-brand-primary">♦</span> for Web3
+            {t("footer.builtwith")}
+            <span class="text-brand-primary">♦</span>
+            {t("footer.for")}
           </span>
         </div>
         <div class="flex items-center gap-6 text-xs">
-          <a href="#" class="text-brand-text-secondary hover:text-brand-primary transition-colors duration-200">Privacy Policy</a>
-          <a href="#" class="text-brand-text-secondary hover:text-brand-primary transition-colors duration-200">Terms of Service</a>
-          <a href="#" class="text-brand-text-secondary hover:text-brand-primary transition-colors duration-200">Cookie Policy</a>
+          <a href="#" class="text-brand-text-secondary hover:text-brand-primary transition-colors duration-200">{t("footer.link.privacy")}</a>
+          <a href="#" class="text-brand-text-secondary hover:text-brand-primary transition-colors duration-200">{t("footer.link.terms")}</a>
+          <a href="#" class="text-brand-text-secondary hover:text-brand-primary transition-colors duration-200">{t("footer.link.cookie")}</a>
         </div>
       </div>
     </div>
