@@ -1,6 +1,6 @@
 import { e as createComponent, f as createAstro, m as maybeRenderHead, s as spreadAttributes, h as addAttribute, l as renderSlot, k as renderComponent, r as renderTemplate, n as renderScript } from './astro/server_BRgZ9G5u.mjs';
 import 'piccolore';
-import { g as getLangFromUrl, u as useTranslations } from './Layout_BoRfYvHb.mjs';
+import { g as getLangFromUrl, u as useTranslations } from './Layout_T4xoX-Cw.mjs';
 /* empty css                         */
 
 const toKebabCase = (string) => string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
