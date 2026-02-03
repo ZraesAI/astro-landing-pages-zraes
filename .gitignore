@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # file zip
 *.zip
+
+# vercel 
+.vercel/
