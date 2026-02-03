@@ -1,0 +1,63 @@
+<div class="cursor"></div>
+
+<style>
+  .cursor {
+    /* Tampilan Dasar */
+    width: 10px; /* Ukuran awal kecil */
+    height: 10px; /* Ukuran awal kecil */
+    background-color: #66fcf1; /* Brand primary cyan */
+    mix-blend-mode: difference;
+    border-radius: 50%;
+    box-shadow:
+      0 0 10px rgba(102, 252, 241, 0.5),
+      0 0 20px rgba(102, 252, 241, 0.3);
+
+    /* Posisi & Layer */
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none; /* Sangat penting! */
+
+    /* Center a div on the cursor tip */
+    transform: translate(-50%, -50%);
+
+    /* REVISI: Transisi disamakan dengan kode lama agar lebih halus */
+    transition:
+      transform 0.3s ease,
+      opacity 0.4s ease,
+      box-shadow 0.3s ease;
+  }
+
+  /* REVISI: State saat hover, dibuat lebih besar dan transparan */
+  .cursor.cursor-active {
+    transform: translate(-50%, -50%) scale(8); /* <-- Dibuat 8x lebih besar */
+    opacity: 0.15; /* <-- Dibuat nyaris transparan */
+    box-shadow:
+      0 0 30px rgba(102, 252, 241, 0.4),
+      0 0 60px rgba(102, 252, 241, 0.2);
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const cursor = document.querySelector(".cursor");
+    const interactiveElements = document.querySelectorAll("a, button, .cursor-pointer");
+
+    // Menggerakkan kursor
+    window.addEventListener("mousemove", (e) => {
+      if (cursor) {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+      }
+    });
+
+    // Menambah/menghapus class 'cursor-active' saat hover
+    interactiveElements.forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        if (cursor) cursor.classList.add("cursor-active");
+      });
+      el.addEventListener("mouseleave", () => {
+        if (cursor) cursor.classList.remove("cursor-active");
+      });
+    });
+  });
+</script>

@@ -39,90 +39,222 @@ const metrics = [
 ---
 
 <section class="bg-brand-background py-20 lg:py-32 relative overflow-hidden">
-  <!-- Background Elements -->
-  <div class="absolute inset-0 opacity-[0.02] grid-pattern"></div>
-  <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-[#BFFF00]/5 rounded-full blur-[200px]"></div>
-  <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-primary/5 rounded-full blur-[180px]"></div>
+  <!-- Dynamic Background -->
+  <div class="absolute inset-0 opacity-[0.03] grid-pattern"></div>
+  <div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-[#BFFF00]/10 rounded-full blur-[120px] -translate-y-1/2"></div>
+  <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-primary/10 rounded-full blur-[100px]"></div>
 
   <div class="container mx-auto px-6 max-w-7xl relative z-10">
-    <!-- Section Header -->
-    <div class="text-center mb-16 space-y-4">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-primary/30 bg-brand-primary/5">
-        <BarChart2 class="w-4 h-4 text-brand-primary" />
-        <span class="text-sm text-brand-primary font-medium uppercase tracking-wider">Platform Analytics</span>
+    <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+      <!-- Left Content: Value Proposition -->
+      <div class="flex-1 space-y-8 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-primary/30 bg-brand-primary/5 mx-auto lg:mx-0">
+          <Zap class="w-4 h-4 text-brand-primary" />
+          <span class="text-xs md:text-sm text-brand-primary font-bold uppercase tracking-widest">Instant Analysis</span>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+          Your Personal <br class="hidden lg:block" />
+          <span class="text-glow bg-gradient-to-r from-[#BFFF00] to-brand-primary bg-clip-text text-transparent">AI Market Analyst</span>
+        </h2>
+
+        <p class="text-[#C5C6C7] text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">Stop staring at complex dashboards. Just type a ticker, and get professional-grade technical analysis delivered directly to your Telegram in seconds.</p>
+
+        <!-- Feature List -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+          <div class="feature-item p-4 rounded-xl bg-brand-surface/30 border border-white/5 hover:border-brand-primary/30 transition-all duration-300">
+            <div class="w-10 h-10 rounded-lg bg-[#BFFF00]/10 flex items-center justify-center mb-3">
+              <TrendingUp class="w-5 h-5 text-[#BFFF00]" />
+            </div>
+            <h4 class="text-white font-bold mb-1">Pattern Detection</h4>
+            <p class="text-sm text-[#C5C6C7]/70">Auto-identifies wedges, flags, and RSI divergences.</p>
+          </div>
+
+          <div class="feature-item p-4 rounded-xl bg-brand-surface/30 border border-white/5 hover:border-brand-primary/30 transition-all duration-300">
+            <div class="w-10 h-10 rounded-lg bg-brand-primary/10 flex items-center justify-center mb-3">
+              <Lock class="w-5 h-5 text-brand-primary" />
+            </div>
+            <h4 class="text-white font-bold mb-1">Private & Secure</h4>
+            <p class="text-sm text-[#C5C6C7]/70">Your strategies and queries remain 100% encrypted.</p>
+          </div>
+        </div>
+
+        <div class="pt-6">
+          <a href="https://t.me/Gilang_Bot" target="_blank" class="btn-cyber group relative px-8 py-4 bg-[#BFFF00] text-black font-bold uppercase tracking-wider text-sm transition-all hover:bg-[#9FE000] clip-path-cyber inline-flex">
+            <span class="relative z-10 flex items-center gap-2">
+              <span class="text-lg">Try the Bot Now</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-arrow-right group-hover:translate-x-1 transition-transform"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg
+              >
+            </span>
+            <!-- Button Glitch Layer -->
+            <div class="absolute inset-0 bg-white/50 opacity-0 group-hover:opacity-20 transition-opacity"></div>
+          </a>
+        </div>
       </div>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-        Real-Time <span class="text-glow bg-gradient-to-r from-[#BFFF00] to-brand-primary bg-clip-text text-transparent">Performance Metrics</span>
-      </h2>
-      <p class="text-[#C5C6C7] max-w-2xl mx-auto text-lg">Transparent on-chain data powering trustless verification for your algorithmic trading bots.</p>
-    </div>
 
-    <!-- Main Feature Cards - Glassmorphism -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-16">
-      {
-        features.map((feature, i) => {
-          const IconComponent = feature.icon;
-          return (
-            <div
-              class="feature-card group relative p-8 rounded-2xl backdrop-blur-xl bg-brand-surface/40 border border-white/10 hover:border-white/20 transition-all duration-500 hover:transform hover:scale-[1.02] overflow-hidden"
-              style={`--delay: ${i * 0.1}s; --accent-color: ${feature.color}`}
-            >
-              {/* Glowing border effect */}
-              <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={`box-shadow: inset 0 0 60px ${feature.color}15, 0 0 40px ${feature.color}10`} />
+      <!-- Right Content: The "Cool" Chat Visualization -->
+      <div class="flex-1 w-full max-w-md lg:max-w-full chat-interface-container perspective-1000">
+        <div class="relative bg-brand-background border border-white/10 rounded-3xl p-4 shadow-2xl overflow-hidden chat-window transform transition-transform duration-500 hover:rotate-y-2 hover:rotate-x-2">
+          <!-- Mock Status Bar -->
+          <div class="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-brand-surface/50 rounded-t-2xl">
+            <div class="flex items-center gap-3">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <div class="text-[#C5C6C7] text-xs font-mono tracking-widest">ZRAES_BOT_TERMINAL</div>
+          </div>
 
-              {/* Corner accent */}
-              <div class="absolute top-0 right-0 w-32 h-32 opacity-20 group-hover:opacity-40 transition-opacity" style={`background: radial-gradient(circle at top right, ${feature.color}40, transparent 70%)`} />
+          <!-- Chat Area -->
+          <div class="p-6 space-y-6 min-h-[400px] font-mono text-sm relative">
+            <!-- Background Glitch Effect -->
+            <div class="absolute inset-0 bg-scanlines opacity-10 pointer-events-none"></div>
 
-              {/* Content */}
-              <div class="relative z-10">
-                {/* Icon */}
-                <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6 border transition-all duration-300" style={`background: ${feature.color}10; border-color: ${feature.color}30;`}>
-                  <IconComponent class="w-7 h-7" style={`color: ${feature.color}`} />
+            <!-- Messages -->
+            <div class="chat-message user flex justify-end animate-slide-in-right opacity-0" style="animation-delay: 0.2s; animation-fill-mode: forwards;">
+              <div class="bg-brand-surface/80 text-white px-4 py-3 rounded-2xl rounded-tr-none border border-white/10 shadow-lg max-w-[80%]">
+                <span class="text-[#BFFF00] mr-2">$</span> /plan BBCA
+              </div>
+            </div>
+
+            <div class="chat-message bot flex flex-col gap-2 animate-slide-in-left opacity-0" style="animation-delay: 0.8s; animation-fill-mode: forwards;">
+              <div class="flex items-center gap-2 mb-1">
+                <div class="w-6 h-6 rounded bg-brand-primary/20 flex items-center justify-center border border-brand-primary/30">
+                  <Brain class="w-3 h-3 text-brand-primary" />
                 </div>
-
-                {/* Title & Value */}
-                <div class="mb-4">
-                  <p class="text-[#C5C6C7] text-sm uppercase tracking-wider mb-1">{feature.title}</p>
-                  <div class="text-4xl lg:text-5xl font-bold text-white" style={`text-shadow: 0 0 30px ${feature.color}30`}>
-                    {feature.value}
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p class="text-[#C5C6C7]/80 text-sm mb-4">{feature.description}</p>
-
-                {/* Trend Badge */}
-                <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-medium" style={`background: ${feature.color}15; color: ${feature.color}`}>
-                  <TrendingUp class="w-3 h-3" />
-                  {feature.trend}
-                </div>
+                <span class="text-xs text-brand-primary">Zraes AI • Bot</span>
               </div>
 
-              {/* Bottom glow line */}
-              <div class="absolute bottom-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={`background: linear-gradient(90deg, transparent, ${feature.color}, transparent)`} />
-            </div>
-          );
-        })
-      }
-    </div>
+              <div class="bg-[#1A1A1A] border border-brand-primary/20 rounded-2xl rounded-tl-none p-1 overflow-hidden shadow-[0_0_20px_rgba(102,252,241,0.1)]">
+                <!-- Stylized Graph Placeholder -->
+                <div class="relative bg-gradient-to-b from-brand-surface/40 to-brand-background h-40 rounded-xl p-4 flex items-end gap-1">
+                  <div class="w-full h-full absolute inset-0 grid-graph opacity-20"></div>
+                  <!-- Bars -->
+                  <div class="flex-1 bg-red-500/50 h-[40%] rounded-sm"></div>
+                  <div class="flex-1 bg-green-500/50 h-[60%] rounded-sm"></div>
+                  <div class="flex-1 bg-green-500/50 h-[50%] rounded-sm"></div>
+                  <div class="flex-1 bg-red-500/50 h-[30%] rounded-sm"></div>
+                  <div class="flex-1 bg-green-500/50 h-[80%] rounded-sm animate-pulse-fast"></div>
 
-    <!-- Secondary Metrics Row -->
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-      {
-        metrics.map((metric, i) => {
-          const IconComponent = metric.icon;
-          return (
-            <div class="metric-item group p-5 rounded-xl bg-brand-surface/20 border border-white/5 hover:border-brand-primary/20 transition-all duration-300 text-center" style={`--delay: ${i * 0.05}s`}>
-              <IconComponent class="w-5 h-5 text-brand-primary mx-auto mb-3" />
-              <div class="text-2xl font-bold text-white mb-1">{metric.value}</div>
-              <div class="text-xs text-[#C5C6C7] uppercase tracking-wider">{metric.label}</div>
+                  <!-- Overlay Analysis Text -->
+                  <div class="absolute top-2 left-2 right-2 bg-black/60 backdrop-blur-md rounded border border-white/5 p-2">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-white font-bold">BBCA.JK</span>
+                      <span class="text-[#BFFF00]">+2.4%</span>
+                    </div>
+                    <div class="text-[10px] text-[#C5C6C7]">
+                      Signal: <span class="text-[#BFFF00]">STRONG BUY</span><br />
+                      Target: 10,450
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          );
-        })
-      }
+
+            <!-- Typing Indicator -->
+            <div class="flex gap-1 pl-2 animate-fade-in opacity-0" style="animation-delay: 2s; animation-fill-mode: forwards;">
+              <div class="w-1.5 h-1.5 bg-brand-primary/50 rounded-full animate-bounce"></div>
+              <div class="w-1.5 h-1.5 bg-brand-primary/50 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+              <div class="w-1.5 h-1.5 bg-brand-primary/50 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Elements behind chat -->
+        <div class="absolute -top-10 -right-10 w-24 h-24 bg-brand-primary/20 rounded-full blur-2xl animate-pulse-slow"></div>
+        <div class="absolute -bottom-5 -left-5 w-32 h-32 bg-[#BFFF00]/10 rounded-full blur-2xl animate-pulse-slow" style="animation-delay: 1s"></div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* Clip Path for Buttons */
+  .clip-path-cyber {
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+
+  .grid-pattern {
+    background-image: linear-gradient(rgba(102, 252, 241, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(102, 252, 241, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .grid-graph {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 10px 10px;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 30px rgba(191, 255, 0, 0.3);
+  }
+
+  .bg-scanlines {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2));
+    background-size: 100% 4px;
+  }
+
+  /* Animations */
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.5s ease-out;
+  }
+  .animate-slide-in-left {
+    animation: slideInLeft 0.5s ease-out;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .rotate-y-2 {
+    transform: rotateY(2deg);
+  }
+  .rotate-x-2 {
+    transform: rotateX(2deg);
+  }
+</style>
 
 <style>
   .grid-pattern {

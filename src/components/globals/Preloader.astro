@@ -17,7 +17,7 @@
   <canvas id="preloader-neural" class="absolute inset-0 w-full h-full opacity-30"></canvas>
 
   <!-- Content Container -->
-  <div class="relative z-10 flex flex-col items-center justify-center gap-8 text-center">
+  <div id="preloader-content" class="relative z-10 flex flex-col items-center justify-center gap-8 text-center">
     <!-- Logo/Text ZRAES AI -->
     <div class="relative">
       <h1 class="text-4xl md:text-6xl font-bold tracking-wider relative z-10">
@@ -42,18 +42,8 @@
     </div>
   </div>
 
-  <!-- Closing animation overlay -->
-  <div id="preloader-closing" class="absolute bg-brand-background rounded-full opacity-0 pointer-events-none" style="left: 50%; top: 50%; width: 0; height: 0; transform: translate(-50%, -50%) scale(0);"></div>
-
-  <!-- Cursor Effect -->
-  <div id="cursor-effect" class="absolute pointer-events-none opacity-0 z-[10000]" style="left: 50%; top: 50%; transform: translate(-50%, -50%);">
-    <!-- Ripple effect circles -->
-    <div id="cursor-ripple-1" class="absolute rounded-full border-2 border-brand-primary opacity-0 w-20 h-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
-    <div id="cursor-ripple-2" class="absolute rounded-full border-2 border-brand-secondary opacity-0 w-20 h-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
-    <div id="cursor-ripple-3" class="absolute rounded-full border-2 border-brand-primary-dark opacity-0 w-20 h-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
-    <!-- Center glow -->
-    <div id="cursor-glow" class="absolute rounded-full bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-primary opacity-0 blur-xl w-20 h-20" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></div>
-  </div>
+  <!-- Final cursor dot that remains after closing -->
+  <div id="final-cursor-dot" class="absolute w-[10px] h-[10px] rounded-full bg-[#66fcf1] opacity-0 pointer-events-none z-[10001]" style="box-shadow: 0 0 10px rgba(102, 252, 241, 0.5), 0 0 20px rgba(102, 252, 241, 0.3);"></div>
 </div>
 
 <style>
@@ -259,17 +249,13 @@
     return interval;
   };
 
-  // Animate closing with cursor position and cursor effect
+  // Animate closing with cursor position - shrink into cursor like the custom cursor
   const animateClosing = () => {
     const preloader = document.getElementById("preloader");
-    const closingOverlay = document.getElementById("preloader-closing");
-    const cursorEffect = document.getElementById("cursor-effect");
-    const cursorRipple1 = document.getElementById("cursor-ripple-1");
-    const cursorRipple2 = document.getElementById("cursor-ripple-2");
-    const cursorRipple3 = document.getElementById("cursor-ripple-3");
-    const cursorGlow = document.getElementById("cursor-glow");
+    const preloaderContent = document.getElementById("preloader-content");
+    const finalCursorDot = document.getElementById("final-cursor-dot");
 
-    if (!preloader || !closingOverlay || !cursorEffect) return;
+    if (!preloader) return;
 
     // Get the latest cursor position at the moment of closing
     let targetX = cursorX;
@@ -291,92 +277,60 @@
     targetX = Math.max(0, Math.min(targetX, window.innerWidth));
     targetY = Math.max(0, Math.min(targetY, window.innerHeight));
 
-    // Position cursor effect at cursor location
-    cursorEffect.style.left = `${targetX}px`;
-    cursorEffect.style.top = `${targetY}px`;
-    cursorEffect.style.transform = "translate(-50%, -50%)";
-
-    // Calculate distance from all corners to determine max radius needed
+    // Calculate the maximum radius needed to cover the entire screen from cursor position
     const distances = [
-      Math.sqrt(Math.pow(targetX, 2) + Math.pow(targetY, 2)), // Top-left
-      Math.sqrt(Math.pow(window.innerWidth - targetX, 2) + Math.pow(targetY, 2)), // Top-right
-      Math.sqrt(Math.pow(targetX, 2) + Math.pow(window.innerHeight - targetY, 2)), // Bottom-left
-      Math.sqrt(Math.pow(window.innerWidth - targetX, 2) + Math.pow(window.innerHeight - targetY, 2)), // Bottom-right
+      Math.sqrt(Math.pow(targetX, 2) + Math.pow(targetY, 2)),
+      Math.sqrt(Math.pow(window.innerWidth - targetX, 2) + Math.pow(targetY, 2)),
+      Math.sqrt(Math.pow(targetX, 2) + Math.pow(window.innerHeight - targetY, 2)),
+      Math.sqrt(Math.pow(window.innerWidth - targetX, 2) + Math.pow(window.innerHeight - targetY, 2)),
     ];
-    const maxRadius = Math.max(...distances) * 1.5; // Add extra for smooth coverage
-    const diameter = maxRadius * 2;
+    const maxRadius = Math.max(...distances) * 1.2;
 
-    // Set initial position for closing overlay
-    closingOverlay.style.left = `${targetX}px`;
-    closingOverlay.style.top = `${targetY}px`;
-    closingOverlay.style.transform = "translate(-50%, -50%) scale(0)";
-    closingOverlay.style.width = `${diameter}px`;
-    closingOverlay.style.height = `${diameter}px`;
+    // Position the final cursor dot
+    if (finalCursorDot) {
+      finalCursorDot.style.left = `${targetX}px`;
+      finalCursorDot.style.top = `${targetY}px`;
+      finalCursorDot.style.transform = "translate(-50%, -50%)";
+    }
 
-    // Trigger reflow
-    closingOverlay.offsetHeight;
+    // Fade out content first
+    if (preloaderContent) {
+      preloaderContent.style.transition = "opacity 0.3s ease-out, transform 0.5s ease-in";
+      preloaderContent.style.opacity = "0";
+      preloaderContent.style.transform = `translate(${(targetX - window.innerWidth / 2) * 0.1}px, ${(targetY - window.innerHeight / 2) * 0.1}px) scale(0.9)`;
+    }
 
-    // Start cursor effect animation
+    // Use clip-path to create the shrinking circle effect
+    // Start with full coverage, end with tiny circle at cursor
     setTimeout(() => {
-      cursorEffect.style.opacity = "1";
-      cursorEffect.style.transition = "opacity 0.3s ease-out";
+      preloader.style.transition = "clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1)";
+      preloader.style.clipPath = `circle(${maxRadius}px at ${targetX}px ${targetY}px)`;
 
-      // Animate ripple effects
-      if (cursorRipple1 && cursorRipple2 && cursorRipple3) {
-        // Ripple 1 - immediate
-        cursorRipple1.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
-        cursorRipple1.style.opacity = "1";
-        cursorRipple1.style.transform = "translate(-50%, -50%) scale(4)";
-        cursorRipple1.style.width = "80px";
-        cursorRipple1.style.height = "80px";
+      // Force reflow
+      preloader.offsetHeight;
 
-        // Ripple 2 (delayed)
-        setTimeout(() => {
-          cursorRipple2.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
-          cursorRipple2.style.opacity = "0.7";
-          cursorRipple2.style.transform = "translate(-50%, -50%) scale(5)";
-          cursorRipple2.style.width = "80px";
-          cursorRipple2.style.height = "80px";
-        }, 100);
+      // Animate to small circle (cursor size)
+      requestAnimationFrame(() => {
+        preloader.style.clipPath = `circle(5px at ${targetX}px ${targetY}px)`;
+      });
+    }, 100);
 
-        // Ripple 3 (more delayed)
-        setTimeout(() => {
-          cursorRipple3.style.transition = "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
-          cursorRipple3.style.opacity = "0.5";
-          cursorRipple3.style.transform = "translate(-50%, -50%) scale(6)";
-          cursorRipple3.style.width = "80px";
-          cursorRipple3.style.height = "80px";
-        }, 200);
+    // Show the final cursor dot just before the preloader fully closes
+    setTimeout(() => {
+      if (finalCursorDot) {
+        finalCursorDot.style.transition = "opacity 0.2s ease-out";
+        finalCursorDot.style.opacity = "1";
       }
+    }, 700);
 
-      // Animate glow effect
-      if (cursorGlow) {
-        cursorGlow.style.transition = "opacity 0.4s ease-out, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)";
-        cursorGlow.style.opacity = "0.8";
-        cursorGlow.style.transform = "translate(-50%, -50%) scale(3)";
+    // Fade out the final dot and remove preloader
+    setTimeout(() => {
+      if (finalCursorDot) {
+        finalCursorDot.style.transition = "opacity 0.3s ease-out, transform 0.3s ease-out";
+        finalCursorDot.style.opacity = "0";
+        finalCursorDot.style.transform = "translate(-50%, -50%) scale(0.5)";
       }
-    }, 10);
-
-    // Start closing animation
-    setTimeout(() => {
-      closingOverlay.style.opacity = "1";
-      closingOverlay.style.transform = "translate(-50%, -50%) scale(1)";
-      closingOverlay.style.transition = "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease-out";
-    }, 10);
-
-    // Fade out preloader content
-    setTimeout(() => {
-      preloader.style.opacity = "0";
-      preloader.style.transition = "opacity 0.3s ease-out";
-    }, 50);
-
-    // Fade out cursor effect
-    setTimeout(() => {
-      if (cursorEffect) {
-        cursorEffect.style.opacity = "0";
-        cursorEffect.style.transition = "opacity 0.3s ease-out";
-      }
-    }, 400);
+    }, 900);
 
     // Remove preloader after animation
     setTimeout(() => {
@@ -388,7 +342,7 @@
       document.removeEventListener("mouseover", trackMouseOver);
       document.removeEventListener("touchstart", updateTouchPosition);
       document.removeEventListener("touchmove", updateTouchPosition);
-    }, 700);
+    }, 1000);
   };
 
   // Initialize preloader

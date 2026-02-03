@@ -1,0 +1,63 @@
+---
+import { ArrowUp } from "lucide-astro";
+---
+
+<button
+  id="scroll-to-top"
+  class="fixed bottom-8 right-8 z-50 w-12 h-12 bg-gradient-to-br from-brand-primary to-brand-primary-dark text-white rounded-full flex items-center justify-center shadow-xl hover:shadow-2xl hover:scale-110 transition-all duration-300 opacity-0 scale-0 pointer-events-none"
+  aria-label="Scroll to top"
+>
+  <ArrowUp class="w-6 h-6" />
+</button>
+
+<script>
+  function initScrollToTop() {
+    const scrollBtn = document.getElementById("scroll-to-top") as HTMLButtonElement | null;
+    if (!scrollBtn) return;
+
+    let isVisible = false;
+
+    const updateVisibility = () => {
+      const shouldShow = window.scrollY > window.innerHeight / 2;
+
+      if (shouldShow && !isVisible) {
+        isVisible = true;
+        scrollBtn.classList.remove("opacity-0", "scale-0", "pointer-events-none");
+        scrollBtn.classList.add("opacity-100", "scale-100", "pointer-events-auto");
+      } else if (!shouldShow && isVisible) {
+        isVisible = false;
+        scrollBtn.classList.add("opacity-0", "scale-0", "pointer-events-none");
+        scrollBtn.classList.remove("opacity-100", "scale-100", "pointer-events-auto");
+      }
+    };
+
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    };
+
+    // Event listeners
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    scrollBtn.addEventListener("click", scrollToTop);
+
+    // Check initial state
+    updateVisibility();
+  }
+
+  // Initialize on page load
+  document.addEventListener("DOMContentLoaded", initScrollToTop);
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener("astro:page-load", initScrollToTop);
+</script>
+
+<style>
+  #scroll-to-top {
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+</style>

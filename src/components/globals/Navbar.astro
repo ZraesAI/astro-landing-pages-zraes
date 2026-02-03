@@ -1,7 +1,195 @@
 ---
-import NavbarAnimation from "../animations/Navbar.tsx";
+import { Send, Globe, ChevronDown } from "lucide-astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilang_Bot";
+
+const languages = [
+  { code: "en", name: "English", flag: "🇺🇸" },
+  { code: "id", name: "Indonesia", flag: "🇮🇩" },
+];
 ---
 
-<NavbarAnimation client:load telegramBotUrl={TELEGRAM_BOT_URL} />
+<div class="w-full bg-[#0b0c10] border-b border-[#66fcf1]/20">
+  <nav class="w-full max-w-[1400px] mx-auto flex justify-between items-center px-6 md:px-8 py-4">
+    <!-- Logo -->
+    <a href={`/${lang === "id" ? "id" : ""}`} class="cursor-pointer hover:opacity-90 transition-all duration-300 ease-out active:opacity-70 flex-shrink-0 group">
+      <span class="text-xl md:text-2xl font-bold tracking-wider flex items-center gap-2.5">
+        <img src="/icon-zraesai.png" alt="ZRAES AI" class="w-9 h-9 object-contain group-hover:drop-shadow-[0_0_20px_rgba(102,252,241,0.6)] transition-all duration-300 group-hover:scale-110" />
+        <span
+          class="bg-gradient-to-r from-[#66fcf1] via-[#45a29e] to-[#66fcf1] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(102,252,241,0.3)] group-hover:drop-shadow-[0_0_40px_rgba(102,252,241,0.5)] transition-all duration-300 font-black"
+        >
+          ZRAES AI
+        </span>
+      </span>
+    </a>
+
+    <!-- Right Side - Language & Telegram Button -->
+    <div class="flex items-center gap-3">
+      <!-- Language Selector -->
+      <div class="relative" id="lang-selector">
+        <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-xl border border-[#66fcf1]/30 bg-[#1f2833]/50 text-[#c5c6c7] hover:border-[#66fcf1]/50 hover:text-[#66fcf1] transition-all duration-300">
+          <Globe class="w-4 h-4" />
+          <span class="hidden sm:inline text-sm font-medium" id="lang-display">🇺🇸 EN</span>
+          <span class="sm:hidden text-sm" id="lang-flag">🇺🇸</span>
+          <ChevronDown class="w-4 h-4 transition-transform duration-300" id="lang-chevron" />
+        </button>
+
+        <!-- Language Dropdown -->
+        <div
+          id="lang-dropdown"
+          class="absolute top-full right-0 mt-2 w-44 bg-[#1f2833]/95 backdrop-blur-xl rounded-xl border border-[#66fcf1]/25 shadow-[0_8px_32px_rgba(102,252,241,0.15)] overflow-hidden transition-all duration-300 z-50 opacity-0 invisible -translate-y-2"
+        >
+          {
+            languages.map((l) => (
+              <button
+                data-lang-code={l.code}
+                data-lang-name={l.name}
+                data-lang-flag={l.flag}
+                class={`lang-option w-full flex items-center gap-3 px-4 py-3 text-sm transition-all duration-200 text-[#c5c6c7] hover:bg-[#66fcf1]/10 hover:text-[#66fcf1] ${lang === l.code ? "text-[#66fcf1] bg-[#66fcf1]/10" : ""}`}
+              >
+                <span class="text-lg">{l.flag}</span>
+                <span class="font-medium">{l.name}</span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Dashboard Button -->
+      <a
+        href="https://app.zraes.dev"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden md:flex items-center gap-2 px-4 py-2 border border-brand-primary/30 text-brand-primary hover:bg-brand-primary/10 hover:border-brand-primary rounded-lg transition-all duration-300 font-medium text-sm"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"
+          ><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg
+        >
+        {t("nav.dashboard")}
+      </a>
+
+      <!-- Bot Button -->
+      <a
+        href={import.meta.env.TELEGRAM_BOT_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden md:flex btn-cyber group relative px-6 py-2 bg-[#BFFF00] text-black font-bold uppercase tracking-wider text-sm transition-all hover:bg-[#9FE000] clip-path-cyber"
+      >
+        <span class="relative z-10 flex items-center gap-2">
+          <Send class="w-4 h-4" />
+          {t("nav.bot")}
+        </span>
+        <!-- Button Glitch Layer -->
+        <div class="absolute inset-0 bg-white/50 opacity-0 group-hover:opacity-20 transition-opacity"></div>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<!-- Click outside overlay -->
+<div id="lang-overlay" class="fixed inset-0 z-40 hidden"></div>
+
+<style>
+  /* Clip Path for Buttons */
+  .clip-path-cyber {
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  }
+</style>
+
+<script>
+  function initNavbar() {
+    const langBtn = document.getElementById("lang-btn");
+    const langDropdown = document.getElementById("lang-dropdown");
+    const langChevron = document.getElementById("lang-chevron");
+    const langDisplay = document.getElementById("lang-display");
+    const langFlag = document.getElementById("lang-flag");
+    const langOverlay = document.getElementById("lang-overlay");
+    const langOptions = document.querySelectorAll(".lang-option");
+
+    let isOpen = false;
+
+    // Get current path to determine language
+    const currentPath = window.location.pathname;
+    const isId = currentPath.startsWith("/id");
+    const currentLangCode = isId ? "id" : "en";
+
+    function toggleDropdown() {
+      isOpen = !isOpen;
+      if (isOpen) {
+        langDropdown?.classList.remove("opacity-0", "invisible", "-translate-y-2");
+        langDropdown?.classList.add("opacity-100", "visible", "translate-y-0");
+        langChevron?.classList.add("rotate-180");
+        langOverlay?.classList.remove("hidden");
+      } else {
+        langDropdown?.classList.add("opacity-0", "invisible", "-translate-y-2");
+        langDropdown?.classList.remove("opacity-100", "visible", "translate-y-0");
+        langChevron?.classList.remove("rotate-180");
+        langOverlay?.classList.add("hidden");
+      }
+    }
+
+    function closeDropdown() {
+      if (isOpen) {
+        isOpen = false;
+        langDropdown?.classList.add("opacity-0", "invisible", "-translate-y-2");
+        langDropdown?.classList.remove("opacity-100", "visible", "translate-y-0");
+        langChevron?.classList.remove("rotate-180");
+        langOverlay?.classList.add("hidden");
+      }
+    }
+
+    function navigateToLang(code: string) {
+      if (code === currentLangCode) {
+        closeDropdown();
+        return;
+      }
+
+      if (code === "id") {
+        window.location.href = "/id";
+      } else {
+        window.location.href = "/";
+      }
+    }
+
+    function updateActiveState() {
+      langOptions.forEach((option) => {
+        const optionCode = option.getAttribute("data-lang-code");
+        if (optionCode === currentLangCode) {
+          option.classList.add("bg-[#66fcf1]/20", "text-[#66fcf1]");
+          option.classList.remove("text-[#c5c6c7]");
+
+          // Update display
+          const flag = option.getAttribute("data-lang-flag");
+          if (langDisplay) langDisplay.textContent = `${flag} ${currentLangCode.toUpperCase()}`;
+          if (langFlag) langFlag.textContent = flag;
+        } else {
+          option.classList.remove("bg-[#66fcf1]/20", "text-[#66fcf1]");
+          option.classList.add("text-[#c5c6c7]");
+        }
+      });
+    }
+
+    updateActiveState();
+
+    // Event listeners
+    langBtn?.addEventListener("click", toggleDropdown);
+    langOverlay?.addEventListener("click", closeDropdown);
+
+    langOptions.forEach((option) => {
+      option.addEventListener("click", () => {
+        const code = option.getAttribute("data-lang-code") || "en";
+        navigateToLang(code);
+      });
+    });
+  }
+
+  // Initialize on page load
+  document.addEventListener("DOMContentLoaded", initNavbar);
+
+  // Re-initialize on Astro page transitions
+  document.addEventListener("astro:page-load", initNavbar);
+</script>
