@@ -9,7 +9,6 @@ export const ui = {
   en: {
     "nav.home": "Home",
     "nav.about": "About",
-    "nav.dashboard": "DASHBOARD",
     "nav.bot": "TELEGRAM BOT",
     "slider.title.prefix": "ZRAES AI:",
     "slider.title.main1": "ZERO-RISK AGENTIC",
@@ -67,7 +66,6 @@ export const ui = {
   id: {
     "nav.home": "Beranda",
     "nav.about": "Tentang",
-    "nav.dashboard": "DASHBOARD",
     "nav.bot": "TELEGRAM BOT",
     "slider.title.prefix": "ZRAES AI:",
     "slider.title.main1": "ZERO-RISK AGENTIC",
