@@ -33,6 +33,51 @@ export const ui = {
     "profile.bot.signal.value": "STRONG BUY",
     "profile.bot.target": "Target:",
 
+    "profile.commands.badge": "Bot Commands",
+    "profile.commands.title": "Powerful",
+    "profile.commands.title.highlight": "Trading Tools",
+    "profile.commands.desc": "8 professional commands at your fingertips. From scalping to fundamental analysis, all delivered instantly via Telegram.",
+
+    "profile.cmd.dt.name": "Day Trade",
+    "profile.cmd.dt.cmd": "/dt",
+    "profile.cmd.dt.desc": "Scalping analysis with Fibonacci pivot points. Identifies Buy, Take Profit, and Stop Loss areas with low sensitivity for short-term trades.",
+    "profile.cmd.dt.output": "Chart + Text",
+
+    "profile.cmd.swing.name": "Swing Trade",
+    "profile.cmd.swing.cmd": "/swing",
+    "profile.cmd.swing.desc": "Extended horizon analysis with higher sensitivity. Wider TP/SL areas optimized for multi-day to weekly positions.",
+    "profile.cmd.swing.output": "Chart + Text",
+
+    "profile.cmd.fa.name": "Fundamental Analysis",
+    "profile.cmd.fa.cmd": "/fa",
+    "profile.cmd.fa.desc": "Complete fundamental data: PE, PBV, ROE, ROA, DER, Graham Intrinsic Value, Simplified DCF, and fair value assessment.",
+    "profile.cmd.fa.output": "Text",
+
+    "profile.cmd.frx.name": "Forex Analysis",
+    "profile.cmd.frx.cmd": "/frx",
+    "profile.cmd.frx.desc": "Currency pair analysis with hourly granularity. Supports long/short positions with pip distance calculation.",
+    "profile.cmd.frx.output": "Text",
+
+    "profile.cmd.news.name": "Stock News",
+    "profile.cmd.news.cmd": "/news",
+    "profile.cmd.news.desc": "10 latest news from Google News RSS with DuckDuckGo fallback. Real-time market sentiment from multiple sources.",
+    "profile.cmd.news.output": "Text",
+
+    "profile.cmd.tr.name": "Order Book",
+    "profile.cmd.tr.cmd": "/tr",
+    "profile.cmd.tr.desc": "Top 10 Bid/Offer data, cumulative volume, frequency analysis, and Cevin Rules for bid vs offer strength.",
+    "profile.cmd.tr.output": "Chart + Text",
+
+    "profile.cmd.bdm.name": "Bandarmology",
+    "profile.cmd.bdm.cmd": "/bdm",
+    "profile.cmd.bdm.desc": "7 parallel API analysis: pump-dump patterns, smart money flow, sentiment, broker summary, and whale transactions.",
+    "profile.cmd.bdm.output": "Text",
+
+    "profile.cmd.crl.name": "Correlation",
+    "profile.cmd.crl.cmd": "/crl",
+    "profile.cmd.crl.desc": "Stock correlation analysis to identify related market movements and portfolio diversification opportunities.",
+    "profile.cmd.crl.output": "JSON",
+
     "pengumuman.section.badge": "Latest Updates",
     "pengumuman.section.title": "Bot",
     "pengumuman.section.title.highlight": "Changelog",
@@ -89,6 +134,51 @@ export const ui = {
     "profile.bot.signal": "Sinyal:",
     "profile.bot.signal.value": "BELI KUAT",
     "profile.bot.target": "Target:",
+
+    "profile.commands.badge": "Perintah Bot",
+    "profile.commands.title": "Alat Trading",
+    "profile.commands.title.highlight": "Profesional",
+    "profile.commands.desc": "8 perintah profesional di ujung jari Anda. Dari scalping hingga analisis fundamental, semua dikirim instan via Telegram.",
+
+    "profile.cmd.dt.name": "Day Trade",
+    "profile.cmd.dt.cmd": "/dt",
+    "profile.cmd.dt.desc": "Analisis scalping dengan pivot point Fibonacci. Mengidentifikasi area Buy, Take Profit, dan Stop Loss dengan sensitivitas rendah untuk trading jangka pendek.",
+    "profile.cmd.dt.output": "Chart + Teks",
+
+    "profile.cmd.swing.name": "Swing Trade",
+    "profile.cmd.swing.cmd": "/swing",
+    "profile.cmd.swing.desc": "Analisis horizon panjang dengan sensitivitas tinggi. Area TP/SL lebih lebar untuk posisi multi-hari hingga mingguan.",
+    "profile.cmd.swing.output": "Chart + Teks",
+
+    "profile.cmd.fa.name": "Analisis Fundamental",
+    "profile.cmd.fa.cmd": "/fa",
+    "profile.cmd.fa.desc": "Data fundamental lengkap: PE, PBV, ROE, ROA, DER, Graham Intrinsic Value, Simplified DCF, dan penilaian fair value.",
+    "profile.cmd.fa.output": "Teks",
+
+    "profile.cmd.frx.name": "Analisis Forex",
+    "profile.cmd.frx.cmd": "/frx",
+    "profile.cmd.frx.desc": "Analisis pasangan mata uang dengan granularitas per jam. Mendukung posisi long/short dengan kalkulasi jarak pip.",
+    "profile.cmd.frx.output": "Teks",
+
+    "profile.cmd.news.name": "Berita Saham",
+    "profile.cmd.news.cmd": "/news",
+    "profile.cmd.news.desc": "10 berita terbaru dari Google News RSS dengan fallback DuckDuckGo. Sentimen pasar real-time dari berbagai sumber.",
+    "profile.cmd.news.output": "Teks",
+
+    "profile.cmd.tr.name": "Order Book",
+    "profile.cmd.tr.cmd": "/tr",
+    "profile.cmd.tr.desc": "Data Top 10 Bid/Offer, volume kumulatif, analisis frekuensi, dan Cevin Rules untuk kekuatan bid vs offer.",
+    "profile.cmd.tr.output": "Chart + Teks",
+
+    "profile.cmd.bdm.name": "Bandarmology",
+    "profile.cmd.bdm.cmd": "/bdm",
+    "profile.cmd.bdm.desc": "7 analisis API paralel: pola pump-dump, smart money flow, sentimen, ringkasan broker, dan transaksi whale.",
+    "profile.cmd.bdm.output": "Teks",
+
+    "profile.cmd.crl.name": "Korelasi",
+    "profile.cmd.crl.cmd": "/crl",
+    "profile.cmd.crl.desc": "Analisis korelasi saham untuk mengidentifikasi pergerakan pasar terkait dan peluang diversifikasi portofolio.",
+    "profile.cmd.crl.output": "JSON",
 
     "pengumuman.section.badge": "Pembaruan Terbaru",
     "pengumuman.section.title": "Catatan Perubahan",

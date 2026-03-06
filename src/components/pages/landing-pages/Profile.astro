@@ -1,5 +1,5 @@
 ---
-import { Target, Shield, FileCheck, TrendingUp, Brain, Lock, Zap, BarChart2 } from "@lucide/astro";
+import { Target, Shield, FileCheck, TrendingUp, Brain, Lock, Zap, BarChart2, LineChart, CandlestickChart, Calculator, Globe, Newspaper, BookOpen, Users, GitBranch, Image, FileText, Code } from "@lucide/astro";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -12,7 +12,7 @@ const features = [
     value: "99.7%",
     description: t("profile.feature.pattern.desc"),
     icon: Target,
-    color: "#BFFF00",
+    color: "#D4AF37",
     trend: "+12.4%",
   },
   {
@@ -20,8 +20,84 @@ const features = [
     value: "A+",
     description: t("profile.feature.privacy.desc"),
     icon: Shield,
-    color: "#66FCF1",
+    color: "#FFD700",
     trend: "Low Risk",
+  },
+];
+
+// Bot Commands data
+const botCommands = [
+  {
+    cmd: t("profile.cmd.dt.cmd"),
+    name: t("profile.cmd.dt.name"),
+    desc: t("profile.cmd.dt.desc"),
+    output: t("profile.cmd.dt.output"),
+    icon: CandlestickChart,
+    color: "#D4AF37",
+    hasChart: true,
+  },
+  {
+    cmd: t("profile.cmd.swing.cmd"),
+    name: t("profile.cmd.swing.name"),
+    desc: t("profile.cmd.swing.desc"),
+    output: t("profile.cmd.swing.output"),
+    icon: LineChart,
+    color: "#FFD700",
+    hasChart: true,
+  },
+  {
+    cmd: t("profile.cmd.fa.cmd"),
+    name: t("profile.cmd.fa.name"),
+    desc: t("profile.cmd.fa.desc"),
+    output: t("profile.cmd.fa.output"),
+    icon: Calculator,
+    color: "#E6C200",
+    hasChart: false,
+  },
+  {
+    cmd: t("profile.cmd.frx.cmd"),
+    name: t("profile.cmd.frx.name"),
+    desc: t("profile.cmd.frx.desc"),
+    output: t("profile.cmd.frx.output"),
+    icon: Globe,
+    color: "#C9A227",
+    hasChart: false,
+  },
+  {
+    cmd: t("profile.cmd.news.cmd"),
+    name: t("profile.cmd.news.name"),
+    desc: t("profile.cmd.news.desc"),
+    output: t("profile.cmd.news.output"),
+    icon: Newspaper,
+    color: "#F4D03F",
+    hasChart: false,
+  },
+  {
+    cmd: t("profile.cmd.tr.cmd"),
+    name: t("profile.cmd.tr.name"),
+    desc: t("profile.cmd.tr.desc"),
+    output: t("profile.cmd.tr.output"),
+    icon: BookOpen,
+    color: "#B8860B",
+    hasChart: true,
+  },
+  {
+    cmd: t("profile.cmd.bdm.cmd"),
+    name: t("profile.cmd.bdm.name"),
+    desc: t("profile.cmd.bdm.desc"),
+    output: t("profile.cmd.bdm.output"),
+    icon: Users,
+    color: "#DAA520",
+    hasChart: false,
+  },
+  {
+    cmd: t("profile.cmd.crl.cmd"),
+    name: t("profile.cmd.crl.name"),
+    desc: t("profile.cmd.crl.desc"),
+    output: t("profile.cmd.crl.output"),
+    icon: GitBranch,
+    color: "#FFE566",
+    hasChart: false,
   },
 ];
 
@@ -37,7 +113,7 @@ const metrics = [
 <section class="bg-brand-background py-20 lg:py-32 relative overflow-hidden">
   <!-- Dynamic Background -->
   <div class="absolute inset-0 opacity-[0.03] grid-pattern"></div>
-  <div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-[#BFFF00]/10 rounded-full blur-[120px] -translate-y-1/2"></div>
+  <div class="absolute top-1/2 right-0 w-[500px] h-[500px] bg-[#D4AF37]/10 rounded-full blur-[120px] -translate-y-1/2"></div>
   <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-primary/10 rounded-full blur-[100px]"></div>
 
   <div class="container mx-auto px-6 max-w-7xl relative z-10">
@@ -52,27 +128,27 @@ const metrics = [
         <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
           {t("profile.section.title")}
           <br class="hidden lg:block" />
-          <span class="text-glow bg-gradient-to-r from-[#BFFF00] to-brand-primary bg-clip-text text-transparent">{t("profile.section.title.highlight")}</span>
+          <span class="text-glow bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-brand-primary bg-clip-text text-transparent">{t("profile.section.title.highlight")}</span>
         </h2>
 
-        <p class="text-[#C5C6C7] text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">{t("profile.section.desc")}</p>
+        <p class="text-[#B8B8B8] text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">{t("profile.section.desc")}</p>
 
         <!-- Feature List -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
-          <div class="feature-item p-4 rounded-xl bg-brand-surface/30 border border-white/5 hover:border-brand-primary/30 transition-all duration-300">
-            <div class="w-10 h-10 rounded-lg bg-[#BFFF00]/10 flex items-center justify-center mb-3">
-              <TrendingUp class="w-5 h-5 text-[#BFFF00]" />
+          <div class="feature-item p-4 rounded-xl bg-brand-surface/30 border border-[#D4AF37]/10 hover:border-[#D4AF37]/30 transition-all duration-300">
+            <div class="w-10 h-10 rounded-lg bg-[#D4AF37]/10 flex items-center justify-center mb-3">
+              <TrendingUp class="w-5 h-5 text-[#D4AF37]" />
             </div>
             <h4 class="text-white font-bold mb-1">{t("profile.feature.pattern.title")}</h4>
-            <p class="text-sm text-[#C5C6C7]/70">{t("profile.feature.pattern.desc")}</p>
+            <p class="text-sm text-[#B8B8B8]/70">{t("profile.feature.pattern.desc")}</p>
           </div>
 
-          <div class="feature-item p-4 rounded-xl bg-brand-surface/30 border border-white/5 hover:border-brand-primary/30 transition-all duration-300">
+          <div class="feature-item p-4 rounded-xl bg-brand-surface/30 border border-[#D4AF37]/10 hover:border-[#D4AF37]/30 transition-all duration-300">
             <div class="w-10 h-10 rounded-lg bg-brand-primary/10 flex items-center justify-center mb-3">
               <Lock class="w-5 h-5 text-brand-primary" />
             </div>
             <h4 class="text-white font-bold mb-1">{t("profile.feature.privacy.title")}</h4>
-            <p class="text-sm text-[#C5C6C7]/70">{t("profile.feature.privacy.desc")}</p>
+            <p class="text-sm text-[#B8B8B8]/70">{t("profile.feature.privacy.desc")}</p>
           </div>
         </div>
 
@@ -80,7 +156,7 @@ const metrics = [
           <a
             href={import.meta.env.TELEGRAM_BOT_URL}
             target="_blank"
-            class="btn-cyber group relative px-8 py-4 bg-[#BFFF00] text-black font-bold uppercase tracking-wider text-sm transition-all hover:bg-[#9FE000] clip-path-cyber inline-flex"
+            class="btn-cyber group relative px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-bold uppercase tracking-wider text-sm transition-all hover:from-[#FFD700] hover:to-[#D4AF37] clip-path-cyber inline-flex shadow-[0_0_30px_rgba(212,175,55,0.4)]"
           >
             <span class="relative z-10 flex items-center gap-2">
               <span class="text-lg">{t("profile.cta.button")}</span>
@@ -105,15 +181,15 @@ const metrics = [
 
       <!-- Right Content: The "Cool" Chat Visualization -->
       <div class="flex-1 w-full max-w-md lg:max-w-full chat-interface-container perspective-1000">
-        <div class="relative bg-brand-background border border-white/10 rounded-3xl p-4 shadow-2xl overflow-hidden chat-window transform transition-transform duration-500 hover:rotate-y-2 hover:rotate-x-2">
+        <div class="relative bg-brand-background border border-[#D4AF37]/20 rounded-3xl p-4 shadow-2xl overflow-hidden chat-window transform transition-transform duration-500 hover:rotate-y-2 hover:rotate-x-2">
           <!-- Mock Status Bar -->
-          <div class="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-brand-surface/50 rounded-t-2xl">
+          <div class="flex items-center justify-between px-4 py-3 border-b border-[#D4AF37]/10 bg-brand-surface/50 rounded-t-2xl">
             <div class="flex items-center gap-3">
               <div class="w-3 h-3 rounded-full bg-red-500"></div>
               <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
               <div class="w-3 h-3 rounded-full bg-green-500"></div>
             </div>
-            <div class="text-[#C5C6C7] text-xs font-mono tracking-widest">{t("profile.terminal.title")}</div>
+            <div class="text-[#B8B8B8] text-xs font-mono tracking-widest">{t("profile.terminal.title")}</div>
           </div>
 
           <!-- Chat Area -->
@@ -123,8 +199,8 @@ const metrics = [
 
             <!-- Messages -->
             <div class="chat-message user flex justify-end animate-slide-in-right opacity-0" style="animation-delay: 0.2s; animation-fill-mode: forwards;">
-              <div class="bg-brand-surface/80 text-white px-4 py-3 rounded-2xl rounded-tr-none border border-white/10 shadow-lg max-w-[80%]">
-                <span class="text-[#BFFF00] mr-2">$</span> /plan BBCA
+              <div class="bg-brand-surface/80 text-white px-4 py-3 rounded-2xl rounded-tr-none border border-[#D4AF37]/20 shadow-lg max-w-[80%]">
+                <span class="text-[#D4AF37] mr-2">$</span> /plan BBCA
               </div>
             </div>
 
@@ -136,26 +212,26 @@ const metrics = [
                 <span class="text-xs text-brand-primary">{t("profile.bot.name")}</span>
               </div>
 
-              <div class="bg-[#1A1A1A] border border-brand-primary/20 rounded-2xl rounded-tl-none p-1 overflow-hidden shadow-[0_0_20px_rgba(102,252,241,0.1)]">
+              <div class="bg-[#0F0F0F] border border-brand-primary/20 rounded-2xl rounded-tl-none p-1 overflow-hidden shadow-[0_0_20px_rgba(212,175,55,0.15)]">
                 <!-- Stylized Graph Placeholder -->
                 <div class="relative bg-gradient-to-b from-brand-surface/40 to-brand-background h-40 rounded-xl p-4 flex items-end gap-1">
                   <div class="w-full h-full absolute inset-0 grid-graph opacity-20"></div>
                   <!-- Bars -->
                   <div class="flex-1 bg-red-500/50 h-[40%] rounded-sm"></div>
-                  <div class="flex-1 bg-green-500/50 h-[60%] rounded-sm"></div>
-                  <div class="flex-1 bg-green-500/50 h-[50%] rounded-sm"></div>
+                  <div class="flex-1 bg-[#D4AF37]/60 h-[60%] rounded-sm"></div>
+                  <div class="flex-1 bg-[#D4AF37]/60 h-[50%] rounded-sm"></div>
                   <div class="flex-1 bg-red-500/50 h-[30%] rounded-sm"></div>
-                  <div class="flex-1 bg-green-500/50 h-[80%] rounded-sm animate-pulse-fast"></div>
+                  <div class="flex-1 bg-[#D4AF37]/70 h-[80%] rounded-sm animate-pulse-fast"></div>
 
                   <!-- Overlay Analysis Text -->
-                  <div class="absolute top-2 left-2 right-2 bg-black/60 backdrop-blur-md rounded border border-white/5 p-2">
+                  <div class="absolute top-2 left-2 right-2 bg-black/70 backdrop-blur-md rounded border border-[#D4AF37]/20 p-2">
                     <div class="flex justify-between items-center mb-1">
                       <span class="text-white font-bold">BBCA.JK</span>
-                      <span class="text-[#BFFF00]">+2.4%</span>
+                      <span class="text-[#D4AF37]">+2.4%</span>
                     </div>
-                    <div class="text-[10px] text-[#C5C6C7]">
+                    <div class="text-[10px] text-[#B8B8B8]">
                       {t("profile.bot.signal")}
-                      <span class="text-[#BFFF00]">{t("profile.bot.signal.value")}</span><br />
+                      <span class="text-[#D4AF37]">{t("profile.bot.signal.value")}</span><br />
                       {t("profile.bot.target")} 10,450
                     </div>
                   </div>
@@ -174,7 +250,118 @@ const metrics = [
 
         <!-- Floating Elements behind chat -->
         <div class="absolute -top-10 -right-10 w-24 h-24 bg-brand-primary/20 rounded-full blur-2xl animate-pulse-slow"></div>
-        <div class="absolute -bottom-5 -left-5 w-32 h-32 bg-[#BFFF00]/10 rounded-full blur-2xl animate-pulse-slow" style="animation-delay: 1s"></div>
+        <div class="absolute -bottom-5 -left-5 w-32 h-32 bg-[#D4AF37]/15 rounded-full blur-2xl animate-pulse-slow" style="animation-delay: 1s"></div>
+      </div>
+    </div>
+
+    <!-- Bot Commands Section -->
+    <div class="mt-24 lg:mt-32">
+      <!-- Section Header -->
+      <div class="text-center mb-12">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-primary/30 bg-brand-primary/5 mb-6">
+          <Zap class="w-4 h-4 text-brand-primary" />
+          <span class="text-xs md:text-sm text-brand-primary font-bold uppercase tracking-widest">{t("profile.commands.badge")}</span>
+        </div>
+        
+        <h3 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+          {t("profile.commands.title")}
+          <span class="text-glow bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-brand-primary bg-clip-text text-transparent"> {t("profile.commands.title.highlight")}</span>
+        </h3>
+        
+        <p class="text-[#B8B8B8] text-lg max-w-2xl mx-auto">{t("profile.commands.desc")}</p>
+      </div>
+
+      <!-- Commands Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {botCommands.map((command, index) => (
+          <div 
+            class="command-card group relative bg-brand-surface/30 border border-white/5 rounded-2xl p-5 hover:border-white/20 transition-all duration-500 overflow-hidden"
+            style={`--delay: ${index * 0.1}s; --accent-color: ${command.color}`}
+          >
+            <!-- Glow Effect on Hover -->
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={`background: radial-gradient(circle at 50% 50%, ${command.color}10, transparent 70%)`}></div>
+            
+            <!-- Command Header -->
+            <div class="relative z-10">
+              <div class="flex items-start justify-between mb-4">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center border border-white/10 group-hover:border-white/20 transition-colors" style={`background: ${command.color}15`}>
+                  <command.icon class="w-6 h-6" style={`color: ${command.color}`} />
+                </div>
+                
+                <!-- Output Badge -->
+                <div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+                  {command.hasChart ? (
+                    <Image class="w-3 h-3 text-[#D4AF37]" />
+                  ) : (
+                    <FileText class="w-3 h-3 text-brand-primary" />
+                  )}
+                  <span class="text-[10px] text-white/60 font-medium uppercase tracking-wide">{command.output}</span>
+                </div>
+              </div>
+
+              <!-- Command Name & CMD -->
+              <div class="mb-3">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="font-mono text-sm px-2 py-0.5 rounded bg-black/40 border border-white/10 group-hover:border-white/20 transition-colors" style={`color: ${command.color}`}>
+                    {command.cmd}
+                  </span>
+                </div>
+                <h4 class="text-white font-bold text-lg group-hover:text-white transition-colors">{command.name}</h4>
+              </div>
+
+              <!-- Description -->
+              <p class="text-[#B8B8B8]/70 text-sm leading-relaxed line-clamp-3 group-hover:text-[#B8B8B8] transition-colors">{command.desc}</p>
+
+              <!-- Animated Line -->
+              <div class="mt-4 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:via-white/30 transition-colors"></div>
+
+              <!-- Hover Indicator -->
+              <div class="mt-4 flex items-center gap-2 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="w-1.5 h-1.5 rounded-full animate-pulse" style={`background: ${command.color}`}></div>
+                <span class="text-white/40">Ready to execute</span>
+              </div>
+            </div>
+
+            <!-- Corner Decoration -->
+            <div class="absolute -top-12 -right-12 w-24 h-24 rounded-full opacity-0 group-hover:opacity-30 transition-opacity duration-500" style={`background: ${command.color}`}></div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Terminal Preview -->
+      <div class="mt-12 max-w-4xl mx-auto">
+        <div class="bg-brand-background border border-[#D4AF37]/20 rounded-2xl overflow-hidden shadow-2xl shadow-[#D4AF37]/5">
+          <!-- Terminal Header -->
+          <div class="flex items-center justify-between px-4 py-3 border-b border-[#D4AF37]/10 bg-brand-surface/50">
+            <div class="flex items-center gap-3">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <div class="text-[#B8B8B8] text-xs font-mono tracking-widest">QUICK_DEMO</div>
+          </div>
+
+          <!-- Terminal Content -->
+          <div class="p-6 font-mono text-sm space-y-3">
+            <div class="flex items-start gap-2 terminal-line" style="animation-delay: 0.2s">
+              <span class="text-[#D4AF37]">$</span>
+              <span class="text-white">/dt BBRI</span>
+            </div>
+            <div class="text-[#B8B8B8]/70 pl-4 terminal-line" style="animation-delay: 0.6s">
+              <span class="text-brand-primary">→</span> Analyzing BBRI.JK with Fibonacci pivot points...
+            </div>
+            <div class="text-[#B8B8B8]/70 pl-4 terminal-line" style="animation-delay: 1s">
+              <span class="text-[#D4AF37]">✓</span> Buy Area: 4,850 - 4,920 | TP: 5,100, 5,250, 5,400 | SL: 4,750
+            </div>
+            <div class="text-[#B8B8B8]/70 pl-4 terminal-line" style="animation-delay: 1.4s">
+              <span class="text-brand-primary">📊</span> Chart generated. Sending to Telegram...
+            </div>
+            <div class="flex items-center gap-1 pl-4 terminal-line" style="animation-delay: 1.8s">
+              <div class="w-1.5 h-1.5 bg-[#D4AF37] rounded-full animate-pulse shadow-[0_0_8px_rgba(212,175,55,0.5)]"></div>
+              <span class="text-[#D4AF37]">Complete</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -187,17 +374,17 @@ const metrics = [
   }
 
   .grid-pattern {
-    background-image: linear-gradient(rgba(102, 252, 241, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(102, 252, 241, 0.1) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(212, 175, 55, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.1) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
   .grid-graph {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(212, 175, 55, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.1) 1px, transparent 1px);
     background-size: 10px 10px;
   }
 
   .text-glow {
-    text-shadow: 0 0 30px rgba(191, 255, 0, 0.3);
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.4), 0 0 60px rgba(255, 215, 0, 0.2);
   }
 
   .bg-scanlines {
@@ -260,14 +447,14 @@ const metrics = [
 
 <style>
   .grid-pattern {
-    background-image: linear-gradient(rgba(102, 252, 241, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(102, 252, 241, 0.3) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(212, 175, 55, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 175, 55, 0.2) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
   .text-glow {
     text-shadow:
-      0 0 40px rgba(191, 255, 0, 0.4),
-      0 0 80px rgba(191, 255, 0, 0.2);
+      0 0 40px rgba(212, 175, 55, 0.5),
+      0 0 80px rgba(255, 215, 0, 0.3);
   }
 
   .feature-card {
@@ -289,5 +476,41 @@ const metrics = [
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* Command Cards Styles */
+  .command-card {
+    animation: fadeInUp 0.6s ease-out calc(0.3s + var(--delay)) forwards;
+    opacity: 0;
+    backdrop-filter: blur(10px);
+  }
+
+  .command-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-color, #66FCF1), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .command-card:hover::before {
+    opacity: 0.5;
+  }
+
+  .terminal-line {
+    animation: fadeInUp 0.4s ease-out forwards;
+    animation-fill-mode: both;
+    opacity: 0;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 </style>

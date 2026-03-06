@@ -1,91 +1,82 @@
 ---
 import { ArrowRight, Shield, Wallet, Send, Globe, Zap, Database } from "@lucide/astro";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+import Plasma from "../../ui/Plasma";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-brand-background" id="slider-section">
-  <!-- Dynamic Background Matrix -->
-  <div class="absolute inset-0 bg-[#050510]">
-    <div class="absolute inset-0 opacity-[0.05] bg-[linear-gradient(rgba(18,24,27,1)_2px,transparent_2px),linear-gradient(90deg,rgba(18,24,27,1)_2px,transparent_2px)] bg-[size:40px_40px]"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(191,255,0,0.05),transparent_70%)]"></div>
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050505]" id="slider-section">
+  <!-- Plasma Background -->
+  <div class="absolute inset-0 z-0">
+    <Plasma client:load color="#D4AF37" speed={0.8} scale={1.2} opacity={0.6} mouseInteractive={true} />
   </div>
 
-  <!-- Cyberpunk Scanner Line -->
-  <div class="scanner-line"></div>
+  <!-- Dark Overlay for better text readability -->
+  <div class="absolute inset-0 z-[1] bg-gradient-to-b from-[#050505]/70 via-transparent to-[#050505]/80"></div>
+  <div class="absolute inset-0 z-[1] bg-[radial-gradient(circle_at_50%_50%,transparent_30%,#050505_100%)]"></div>
 
   <!-- Floating Data Particles (Decorations) -->
-  <div class="absolute top-20 left-10 opacity-20 hidden lg:block animate-float-delayed">
-    <div class="font-mono text-xs text-[#66FCF1] flex flex-col gap-1">
+  <div class="absolute top-20 left-10 opacity-30 hidden lg:block animate-float-delayed z-[2]">
+    <div class="font-mono text-xs text-[#D4AF37] flex flex-col gap-1">
       <span>0x4F...3A</span>
       <span>BLOCK: 194821</span>
       <span>GAS: 12 GWEI</span>
     </div>
   </div>
 
-  <div class="absolute bottom-40 right-10 opacity-20 hidden lg:block animate-float">
-    <div class="font-mono text-xs text-[#BFFF00] flex flex-col gap-1 text-right">
+  <div class="absolute bottom-40 right-10 opacity-30 hidden lg:block animate-float z-[2]">
+    <div class="font-mono text-xs text-[#FFD700] flex flex-col gap-1 text-right">
       <span>APY: 99.4%</span>
       <span>LTV: 45.2%</span>
       <span>SIGNAL: STRONG_BUY</span>
     </div>
   </div>
 
-  <!-- Central Visual Anchor (Behind Content) -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] pointer-events-none">
-    <div class="absolute inset-0 border border-[#BFFF00]/5 rounded-full animate-spin-slow"></div>
-    <div class="absolute inset-[100px] border border-dashed border-[#66FCF1]/10 rounded-full animate-spin-reverse-slow"></div>
-    <div class="absolute inset-[200px] border border-[#BFFF00]/5 rounded-full animate-pulse"></div>
-  </div>
-
-  <!-- Content Container with Holo Effect -->
+  <!-- Content Container -->
   <div class="relative z-10 container mx-auto px-6 mt-10 text-center">
-    <!-- Holographic Frame -->
-    <div class="absolute inset-0 -z-10 bg-gradient-to-br from-white/5 to-transparent rounded-3xl blur-3xl opacity-20 transform scale-110"></div>
-
-    <div class="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)] max-w-5xl mx-auto backdrop-blur-sm rounded-3xl p-8 lg:p-12 border border-white/5 shadow-[0_0_50px_rgba(0,0,0,0.5)]">
+    <div class="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)] max-w-5xl mx-auto backdrop-blur-md rounded-3xl p-8 lg:p-12 border border-[#D4AF37]/20 bg-[#050505]/40 shadow-[0_0_80px_rgba(212,175,55,0.15)]">
       <!-- Tech Badge -->
-      <div class="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-sm border-l-4 border-[#BFFF00] bg-brand-surface/80 mb-10 overflow-hidden relative group">
-        <div class="absolute inset-0 bg-gradient-to-r from-[#BFFF00]/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-        <Shield class="w-4 h-4 text-[#BFFF00]" />
-        <span class="text-xs text-[#C5C6C7] font-mono uppercase tracking-[0.2em]">{t("slider.title.prefix")} ALPHA V.1.0</span>
+      <div class="hero-badge inline-flex items-center gap-2 px-4 py-1.5 rounded-sm border-l-4 border-[#D4AF37] bg-brand-surface/80 mb-10 overflow-hidden relative group">
+        <div class="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+        <Shield class="w-4 h-4 text-[#D4AF37]" />
+        <span class="text-xs text-[#B8B8B8] font-mono uppercase tracking-[0.2em]">{t("slider.title.prefix")} ALPHA V.1.0</span>
       </div>
 
       <!-- Glitch Title -->
       <h1 class="hero-title text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none mb-6 tracking-tighter relative">
         <span class="relative inline-block" data-text={t("slider.title.main1")}>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#C5C6C7] to-white">{t("slider.title.main1")}</span>
-          <span class="absolute top-0 left-0 -ml-[2px] text-[#BFFF00] opacity-0 animate-glitch-1"></span>
-          <span class="absolute top-0 left-0 ml-[2px] text-[#66FCF1] opacity-0 animate-glitch-2"></span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E8E8E8] to-white">{t("slider.title.main1")}</span>
+          <span class="absolute top-0 left-0 -ml-[2px] text-[#D4AF37] opacity-0 animate-glitch-1"></span>
+          <span class="absolute top-0 left-0 ml-[2px] text-[#FFD700] opacity-0 animate-glitch-2"></span>
         </span>
         <br class="hidden md:block" />
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#BFFF00] to-[#66FCF1] text-glow-cyber">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#FFD700] to-[#D4AF37] text-glow-cyber">
           {t("slider.title.main2")}
         </span>
       </h1>
 
-      <p class="hero-subtitle text-lg sm:text-xl text-[#C5C6C7]/80 max-w-2xl mx-auto mb-12 font-light border-l-2 border-[#66FCF1]/30 pl-6 text-left hidden md:block">
+      <p class="hero-subtitle text-lg sm:text-xl text-[#B8B8B8]/80 max-w-2xl mx-auto mb-12 font-light border-l-2 border-[#D4AF37]/30 pl-6 text-left hidden md:block">
         &gt; {t("slider.subtitle")}
       </p>
 
       <!-- Mobile Subtitle Fallback -->
-      <p class="hero-subtitle text-base text-[#C5C6C7]/80 max-w-2xl mx-auto mb-10 md:hidden">
+      <p class="hero-subtitle text-base text-[#B8B8B8]/80 max-w-2xl mx-auto mb-10 md:hidden">
         {t("slider.subtitle")}
       </p>
 
       <!-- Cyber Action Bar -->
       <div class="hero-cta flex flex-wrap justify-center items-center gap-6 relative">
         <!-- Connector Line (Decorative) -->
-        <div class="hidden md:block absolute -left-12 top-1/2 w-8 h-[1px] bg-white/10"></div>
-        <div class="hidden md:block absolute -right-12 top-1/2 w-8 h-[1px] bg-white/10"></div>
+        <div class="hidden md:block absolute -left-12 top-1/2 w-8 h-[1px] bg-[#D4AF37]/20"></div>
+        <div class="hidden md:block absolute -right-12 top-1/2 w-8 h-[1px] bg-[#D4AF37]/20"></div>
 
         <a
           href={import.meta.env.TELEGRAM_BOT_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="btn-cyber group relative px-8 py-4 bg-[#BFFF00] text-black font-bold uppercase tracking-wider text-sm transition-all hover:bg-[#9FE000] clip-path-cyber"
+          class="btn-cyber group relative px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-bold uppercase tracking-wider text-sm transition-all hover:from-[#FFD700] hover:to-[#D4AF37] clip-path-cyber shadow-[0_0_30px_rgba(212,175,55,0.4)]"
         >
           <span class="relative z-10 flex items-center gap-2">
             <Send class="w-4 h-4" />
@@ -98,15 +89,15 @@ const t = useTranslations(lang);
       </div>
 
       <!-- System Status Footer -->
-      <div class="mt-16 pt-8 border-t border-white/5 w-full flex justify-between items-center text-[10px] sm:text-xs font-mono text-[#666] uppercase tracking-widest">
+      <div class="mt-16 pt-8 border-t border-[#D4AF37]/10 w-full flex justify-between items-center text-[10px] sm:text-xs font-mono text-[#666] uppercase tracking-widest">
         <div class="flex items-center gap-2">
-          <div class="w-2 h-2 bg-[#BFFF00] rounded-full animate-pulse"></div>
+          <div class="w-2 h-2 bg-[#D4AF37] rounded-full animate-pulse shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
           SYSTEM ONLINE
         </div>
         <div class="hidden sm:flex gap-6">
-          <span><Zap class="w-3 h-3 inline mr-1 text-[#66FCF1]" /> LOW LATENCY</span>
-          <span><Database class="w-3 h-3 inline mr-1 text-[#66FCF1]" /> ON-CHAIN DATA</span>
-          <span><Globe class="w-3 h-3 inline mr-1 text-[#66FCF1]" /> GLOBAL ACCESS</span>
+          <span><Zap class="w-3 h-3 inline mr-1 text-[#D4AF37]" /> LOW LATENCY</span>
+          <span><Database class="w-3 h-3 inline mr-1 text-[#D4AF37]" /> ON-CHAIN DATA</span>
+          <span><Globe class="w-3 h-3 inline mr-1 text-[#D4AF37]" /> GLOBAL ACCESS</span>
         </div>
         <div>SECURE_CONNECTION_ESTABLISHED</div>
       </div>
@@ -115,73 +106,20 @@ const t = useTranslations(lang);
 </section>
 
 <style>
-  /* Cyberpunk Scanner Line */
-  .scanner-line {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(102, 252, 241, 0.1), transparent);
-    animation: scan 8s linear infinite;
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  @keyframes scan {
-    0% {
-      width: 0%;
-      left: 0;
-      opacity: 0;
-    }
-    50% {
-      width: 100%;
-      left: 0;
-      opacity: 1;
-    }
-    100% {
-      width: 0%;
-      left: 100%;
-      opacity: 0;
-    }
-  }
-
   /* Clip Path for Buttons */
   .clip-path-cyber {
     clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
   }
 
-  /* Glows */
+  /* Enhanced Gold Glows */
   .text-glow-cyber {
     text-shadow:
-      0 0 40px rgba(102, 252, 241, 0.4),
-      0 0 10px rgba(191, 255, 0, 0.2);
+      0 0 30px rgba(212, 175, 55, 0.6),
+      0 0 60px rgba(255, 215, 0, 0.4),
+      0 0 100px rgba(212, 175, 55, 0.2);
   }
 
-  /* Rotations */
-  @keyframes spin-slow {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  @keyframes spin-reverse-slow {
-    from {
-      transform: rotate(360deg);
-    }
-    to {
-      transform: rotate(0deg);
-    }
-  }
-
-  .animate-spin-slow {
-    animation: spin-slow 20s linear infinite;
-  }
-  .animate-spin-reverse-slow {
-    animation: spin-reverse-slow 25s linear infinite;
-  }
+  /* Float Animation */
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
@@ -239,11 +177,6 @@ const t = useTranslations(lang);
   }
   .animate-glitch-2 {
     animation: glitch-2 2.5s infinite linear alternate-reverse;
-  }
-
-  /* Ensure background doesn't block text */
-  canvas {
-    opacity: 0.3;
   }
 </style>
 

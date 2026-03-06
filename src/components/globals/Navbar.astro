@@ -13,14 +13,13 @@ const languages = [
 ];
 ---
 
-<div class="w-full bg-[#0b0c10] border-b border-[#66fcf1]/20">
+<div class="w-full bg-[#0A0A0A]/95 backdrop-blur-lg border-b border-[#D4AF37]/20 fixed top-0 left-0 right-0 z-50">
   <nav class="w-full max-w-[1400px] mx-auto flex justify-between items-center px-6 md:px-8 py-4">
     <!-- Logo -->
     <a href={`/${lang === "id" ? "id" : ""}`} class="cursor-pointer hover:opacity-90 transition-all duration-300 ease-out active:opacity-70 flex-shrink-0 group">
       <span class="text-xl md:text-2xl font-bold tracking-wider flex items-center gap-2.5">
-        <img src="/icon-zraesai.png" alt="ZRAES AI" class="w-9 h-9 object-contain group-hover:drop-shadow-[0_0_20px_rgba(102,252,241,0.6)] transition-all duration-300 group-hover:scale-110" />
         <span
-          class="bg-gradient-to-r from-[#66fcf1] via-[#45a29e] to-[#66fcf1] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(102,252,241,0.3)] group-hover:drop-shadow-[0_0_40px_rgba(102,252,241,0.5)] transition-all duration-300 font-black"
+          class="bg-gradient-to-r from-[#FFD700] via-[#D4AF37] to-[#FFD700] bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(212,175,55,0.3)] group-hover:drop-shadow-[0_0_40px_rgba(212,175,55,0.5)] transition-all duration-300 font-black"
         >
           ZRAES AI
         </span>
@@ -31,7 +30,7 @@ const languages = [
     <div class="flex items-center gap-3">
       <!-- Language Selector -->
       <div class="relative" id="lang-selector">
-        <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-xl border border-[#66fcf1]/30 bg-[#1f2833]/50 text-[#c5c6c7] hover:border-[#66fcf1]/50 hover:text-[#66fcf1] transition-all duration-300">
+        <button id="lang-btn" class="flex items-center gap-2 px-3 py-2 rounded-xl border border-[#D4AF37]/30 bg-[#141414]/50 text-[#B8B8B8] hover:border-[#D4AF37]/50 hover:text-[#D4AF37] transition-all duration-300">
           <Globe class="w-4 h-4" />
           <span class="hidden sm:inline text-sm font-medium" id="lang-display">🇺🇸 EN</span>
           <span class="sm:hidden text-sm" id="lang-flag">🇺🇸</span>
@@ -41,7 +40,7 @@ const languages = [
         <!-- Language Dropdown -->
         <div
           id="lang-dropdown"
-          class="absolute top-full right-0 mt-2 w-44 bg-[#1f2833]/95 backdrop-blur-xl rounded-xl border border-[#66fcf1]/25 shadow-[0_8px_32px_rgba(102,252,241,0.15)] overflow-hidden transition-all duration-300 z-50 opacity-0 invisible -translate-y-2"
+          class="absolute top-full right-0 mt-2 w-44 bg-[#141414]/95 backdrop-blur-xl rounded-xl border border-[#D4AF37]/25 shadow-[0_8px_32px_rgba(212,175,55,0.15)] overflow-hidden transition-all duration-300 z-50 opacity-0 invisible -translate-y-2"
         >
           {
             languages.map((l) => (
@@ -49,7 +48,7 @@ const languages = [
                 data-lang-code={l.code}
                 data-lang-name={l.name}
                 data-lang-flag={l.flag}
-                class={`lang-option w-full flex items-center gap-3 px-4 py-3 text-sm transition-all duration-200 text-[#c5c6c7] hover:bg-[#66fcf1]/10 hover:text-[#66fcf1] ${lang === l.code ? "text-[#66fcf1] bg-[#66fcf1]/10" : ""}`}
+                class={`lang-option w-full flex items-center gap-3 px-4 py-3 text-sm transition-all duration-200 text-[#B8B8B8] hover:bg-[#D4AF37]/10 hover:text-[#D4AF37] ${lang === l.code ? "text-[#D4AF37] bg-[#D4AF37]/10" : ""}`}
               >
                 <span class="text-lg">{l.flag}</span>
                 <span class="font-medium">{l.name}</span>
@@ -64,7 +63,7 @@ const languages = [
         href={import.meta.env.TELEGRAM_BOT_URL}
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden md:flex btn-cyber group relative px-6 py-2 bg-[#BFFF00] text-black font-bold uppercase tracking-wider text-sm transition-all hover:bg-[#9FE000] clip-path-cyber"
+        class="hidden md:flex btn-cyber group relative px-6 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-black font-bold uppercase tracking-wider text-sm transition-all hover:from-[#FFD700] hover:to-[#D4AF37] clip-path-cyber shadow-[0_0_20px_rgba(212,175,55,0.3)]"
       >
         <span class="relative z-10 flex items-center gap-2">
           <Send class="w-4 h-4" />
@@ -146,16 +145,16 @@ const languages = [
       langOptions.forEach((option) => {
         const optionCode = option.getAttribute("data-lang-code");
         if (optionCode === currentLangCode) {
-          option.classList.add("bg-[#66fcf1]/20", "text-[#66fcf1]");
-          option.classList.remove("text-[#c5c6c7]");
+          option.classList.add("bg-[#D4AF37]/20", "text-[#D4AF37]");
+          option.classList.remove("text-[#B8B8B8]");
 
           // Update display
           const flag = option.getAttribute("data-lang-flag");
           if (langDisplay) langDisplay.textContent = `${flag} ${currentLangCode.toUpperCase()}`;
           if (langFlag) langFlag.textContent = flag;
         } else {
-          option.classList.remove("bg-[#66fcf1]/20", "text-[#66fcf1]");
-          option.classList.add("text-[#c5c6c7]");
+          option.classList.remove("bg-[#D4AF37]/20", "text-[#D4AF37]");
+          option.classList.add("text-[#B8B8B8]");
         }
       });
     }
