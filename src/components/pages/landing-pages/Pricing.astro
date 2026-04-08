@@ -1,0 +1,174 @@
+---
+import { Check, Zap } from "@lucide/astro";
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const TELEGRAM_BOT_URL =
+	import.meta.env.TELEGRAM_BOT_URL || "https://t.me/ZraesAI";
+
+const features = [
+	t("pricing.feature.1"),
+	t("pricing.feature.2"),
+	t("pricing.feature.3"),
+	t("pricing.feature.4"),
+	t("pricing.feature.5"),
+];
+
+const faqItems = [
+	{ q: t("pricing.faq.q1"), a: t("pricing.faq.a1") },
+	{ q: t("pricing.faq.q2"), a: t("pricing.faq.a2") },
+	{ q: t("pricing.faq.q3"), a: t("pricing.faq.a3") },
+];
+---
+
+<section
+	class="relative py-12 bg-brand-background overflow-hidden"
+	id="pricing-section"
+>
+	<!-- Background Elements -->
+	<div
+		class="absolute inset-0 opacity-[0.02]"
+		style="background-image: linear-gradient(var(--color-primary) 1px, transparent 1px), linear-gradient(90deg, var(--color-primary) 1px, transparent 1px); background-size: 50px 50px;"
+	>
+	</div>
+	<div
+		class="absolute top-0 right-0 w-96 h-96 bg-brand-primary/5 rounded-full blur-[100px] pointer-events-none"
+	>
+	</div>
+	<div
+		class="absolute bottom-0 left-1/4 w-96 h-96 bg-brand-secondary/5 rounded-full blur-[100px] pointer-events-none"
+	>
+	</div>
+
+	<div class="relative container mx-auto px-6 md:px-8 max-w-7xl">
+		<!-- Pricing Card -->
+		<div class="relative group">
+			<!-- Card Background Glow -->
+			<div
+				class="absolute inset-0 bg-gradient-to-r from-brand-primary/20 to-brand-secondary/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+			>
+			</div>
+
+			<!-- Card Container -->
+			<div
+				class="relative backdrop-blur-lg rounded-3xl border border-[#D4AF37]/35 bg-[#111111]/92 p-8 md:p-12 overflow-hidden shadow-[0_0_40px_rgba(212,175,55,0.15)]"
+			>
+				<!-- Premium Badge -->
+				<div
+					class="absolute top-0 right-0 px-4 py-2 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-[#111111] text-xs font-black uppercase tracking-wider rounded-bl-lg"
+				>
+					Most Popular
+				</div>
+
+				<!-- Top Divider -->
+				<div
+					class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-primary to-transparent"
+				>
+				</div>
+
+				<!-- Content Grid -->
+				<div class="grid md:grid-cols-2 gap-12 items-center">
+					<!-- Left Column - Plan Info -->
+					<div>
+						<h3 class="text-2xl font-bold text-white mb-2">
+							{t("pricing.plan.name")}
+						</h3>
+						<p class="text-[#C6C6C6] text-sm mb-6">
+							{t("pricing.plan.desc")}
+						</p>
+
+						<!-- Price -->
+						<div class="mb-4">
+							<div
+								class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#FFD700] via-[#D4AF37] to-[#FFD700] mb-2"
+							>
+								{t("pricing.plan.price")}
+							</div>
+							<p class="text-xs text-[#F3D77A] font-semibold tracking-[0.15em]">
+								{
+									lang === "en"
+										? "LIMITED TIME OFFER"
+										: "PENAWARAN TERBATAS"
+								}
+							</p>
+						</div>
+
+						<p class="text-sm text-[#BEBEBE] mb-8 border-l-2 border-[#D4AF37]/40 pl-3 leading-relaxed">
+							{
+								lang === "en"
+									? "Rp 49.000/month with full premium tools, continuous updates, and no hidden fees."
+									: "Rp 49.000/bulan dengan fitur premium lengkap, update berkelanjutan, dan tanpa biaya tersembunyi."
+							}
+						</p>
+
+						<!-- CTA Button -->
+						<a
+							href={TELEGRAM_BOT_URL}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#FFD700] text-[#111111] font-black uppercase tracking-wider text-sm rounded-xl hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 group/btn"
+						>
+							<span>{t("pricing.cta")}</span>
+							<Zap
+								class="w-4 h-4 group-hover/btn:rotate-12 group-hover/btn:scale-110 transition-transform"
+							/>
+						</a>
+					</div>
+
+					<!-- Right Column - Features List -->
+					<div class="space-y-4 bg-[#0A0A0A]/70 border border-[#D4AF37]/20 rounded-2xl p-6">
+						{
+							features.map((feature) => (
+								<div class="flex items-start gap-3 group/feature">
+									<div class="mt-1 flex-shrink-0">
+										<div class="flex items-center justify-center h-5 w-5 rounded-full bg-brand-primary/20 group-hover/feature:bg-brand-primary/40 transition-colors">
+											<Check class="w-3 h-3 text-brand-primary" />
+										</div>
+									</div>
+									<span class="text-[#D2D2D2] group-hover/feature:text-white transition-colors">
+										{feature}
+									</span>
+								</div>
+							))
+						}
+					</div>
+				</div>
+
+				<!-- Bottom Divider -->
+				<div
+					class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-secondary to-transparent"
+				>
+				</div>
+			</div>
+		</div>
+
+		<!-- FAQ -->
+		<div class="mt-12 md:mt-14">
+			<h3 class="text-center text-xl md:text-2xl font-bold text-white mb-6">{t("pricing.faq.title")}</h3>
+			<div class="grid md:grid-cols-3 gap-4">
+				{
+					faqItems.map((item) => (
+						<div class="rounded-2xl border border-[#D4AF37]/20 bg-[#101010]/85 p-5">
+							<h4 class="text-sm font-bold text-[#F0D27A] mb-2">{item.q}</h4>
+							<p class="text-sm text-[#C6C6C6] leading-relaxed">{item.a}</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	@keyframes gradient-shift {
+		0%,
+		100% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+	}
+</style>

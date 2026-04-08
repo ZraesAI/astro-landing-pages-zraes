@@ -1,11 +1,18 @@
 ---
 import Slider from "../components/pages/landing-pages/Slider.astro";
 import Profile from "../components/pages/landing-pages/Profile.astro";
-import Pengumuman from "../components/pages/landing-pages/Pengumuman.astro";
+import Pricing from "../components/pages/landing-pages/Pricing.astro";
+import Community from "../components/pages/landing-pages/Community.astro";
 import Layout from "../layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Layout title="Homepage">
 	<Slider />
 	<Profile />
+	<Pricing />
+	<Community />
 </Layout>

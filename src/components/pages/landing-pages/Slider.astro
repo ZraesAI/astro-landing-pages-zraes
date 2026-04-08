@@ -1,7 +1,7 @@
 ---
-import { ArrowRight, Shield, Wallet, Send, Globe, Zap, Database } from "@lucide/astro";
+import { ArrowRight, Shield, Send, Globe, Zap, Database } from "@lucide/astro";
 import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
-import Plasma from "../../ui/Plasma";
+// import Plasma from "../../ui/Plasma";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -9,9 +9,9 @@ const t = useTranslations(lang);
 
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050505]" id="slider-section">
   <!-- Plasma Background -->
-  <div class="absolute inset-0 z-0">
+  <!-- <div class="absolute inset-0 z-0">
     <Plasma client:load color="#D4AF37" speed={0.8} scale={1.2} opacity={0.6} mouseInteractive={true} />
-  </div>
+  </div> -->
 
   <!-- Dark Overlay for better text readability -->
   <div class="absolute inset-0 z-[1] bg-gradient-to-b from-[#050505]/70 via-transparent to-[#050505]/80"></div>

@@ -5,7 +5,7 @@ import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const currentYear = new Date().getFullYear();
-const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilang_Bot";
+const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/ZraesAI";
 ---
 
 <footer class="relative bg-brand-background text-white overflow-hidden">
@@ -20,7 +20,7 @@ const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilan
   <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-primary/50 to-transparent"></div>
 
   <div class="relative container mx-auto px-6 2xl:px-28 py-16 md:py-20">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-12 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
       <!-- Brand Section -->
       <div class="lg:col-span-2">
         <a href={`/${lang === "id" ? "id" : ""}`} class="inline-block mb-6 group">
@@ -52,42 +52,42 @@ const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilan
         </div>
       </div>
 
-      <!-- Platform Links -->
+      <!-- Main Menu (Synced with Navbar) -->
       <div>
         <h3 class="text-sm font-bold mb-5 text-white uppercase tracking-wider flex items-center gap-2">
           <div class="w-1 h-4 bg-gradient-to-b from-brand-primary to-brand-secondary rounded-full"></div>
-          {t("footer.col.platform")}
+          {lang === "en" ? "Main Menu" : "Menu Utama"}
         </h3>
         <ul class="space-y-3">
           <li>
-            <a href="#" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
+            <a href="#features-section" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
               <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
-              {t("footer.link.analytics")}
+              {t("nav.features")}
             </a>
           </li>
           <li>
-            <a href="#" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
+            <a href="#pricing-section" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
               <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
-              {t("footer.link.risk")}
+              {t("nav.pricing")}
             </a>
           </li>
           <li>
-            <a href="#" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
+            <a href="#community-section" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
               <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
-              {t("footer.link.docs")}
+              {t("nav.community")}
             </a>
           </li>
           <li>
-            <a href="#" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
+            <a href={TELEGRAM_BOT_URL} target="_blank" rel="noopener noreferrer" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-all duration-200 flex items-center gap-2 group">
               <span class="w-1 h-1 rounded-full bg-brand-primary/50 group-hover:bg-brand-primary group-hover:w-2 transition-all duration-200"></span>
-              {t("footer.link.api")}
+              {t("nav.bot")}
             </a>
           </li>
         </ul>
       </div>
 
       <!-- Resources -->
-      <div>
+      <!-- <div>
         <h3 class="text-sm font-bold mb-5 text-white uppercase tracking-wider flex items-center gap-2">
           <div class="w-1 h-4 bg-gradient-to-b from-brand-primary to-brand-secondary rounded-full"></div>
           {t("footer.col.resources")}
@@ -118,7 +118,7 @@ const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilan
             </a>
           </li>
         </ul>
-      </div>
+      </div> -->
 
       <!-- Community -->
       <div>
@@ -158,9 +158,9 @@ const TELEGRAM_BOT_URL = import.meta.env.TELEGRAM_BOT_URL || "https://t.me/Gilan
           </a>
         </div>
         <div class="mt-6">
-          <a href="mailto:contact@zraes.ai" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-colors flex items-center gap-2">
+          <a href="mailto:admin@zraes.dev" class="text-sm text-brand-text-secondary hover:text-brand-primary transition-colors flex items-center gap-2">
             <Mail class="w-4 h-4" />
-            contact@zraes.ai
+            admin@zraes.dev
           </a>
         </div>
       </div>
